@@ -7,7 +7,7 @@ import data_manager
 @app.route('/')
 @app.route("/list")
 def list_of_questions():
-    list_of_questions = data_manager.get_data_from_file("sample_data/question.csv")
+    list_of_questions = data_manager.get_list_of_questions()
     return render_template("list.html",list_of_questions=list_of_questions)
 
 

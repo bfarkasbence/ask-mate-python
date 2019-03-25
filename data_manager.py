@@ -1,14 +1,10 @@
-import csv
+import connection
 
-DATA_HEADER = ["id","submission_time","view_number","vote_number","title","message","image"]
+def get_list_of_questions():
+    list_of_dic = connection.get_data_from_file("sample_data/question.csv")
+    result= []
+    for item in list_of_dic[1:]:
+        result.append(item.get("title"))
+    return result
 
 
-def get_data_from_file(filename):
-    with open(filename,"r") as file:
-        result = []
-        stories = csv.DictReader(file,fieldnames=DATA_HEADER)
-        for row in stories:
-            result.append(dict(row))
-        return result
-
-print(get_data_from_file("sample_data/question.csv"))
