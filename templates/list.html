@@ -5,6 +5,16 @@
     <title>List Quesstions</title>
 </head>
 <body>
+    <h1>Questions:</h1>
+    <table>
+        {%for items in list_of_questions%}
+        <tr>
+            {%for value in items.values()%}
+            <td>{{value}}</td>
+            {%endfor%}
+        </tr>
+        {%endfor%}
+    </table>
 
 </body>
 </html>
