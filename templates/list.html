@@ -6,13 +6,13 @@
 </head>
 <body>
     <h1>Questions:</h1>
-    <lo>
+    <ol>
         {%for item in list_of_questions%}
         <li>
-            {{item}}
+            <a href="questions/{{loop.index0}}">{{item}}</a>
         </li>
         {%endfor%}
-    </lo>
+    </ol>
 
 </body>
 </html>
