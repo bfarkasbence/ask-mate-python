@@ -11,5 +11,12 @@ def list_of_questions():
     return render_template("list.html",list_of_questions=list_of_questions)
 
 
+@app.route("/questions/<question_id>")
+def questions_id(question_id):
+    question_data = data_manager.get_question_data_by_ID(question_id)
+    return render_template("question.html", question_data=question_data)
+
+
+
 if __name__ == "__main__":
     app.run(debug=True, port=5000)

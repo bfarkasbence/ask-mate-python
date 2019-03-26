@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Display a question</title>
+</head>
+<body>
+<h1>Questions:</h1>
+    <ol>
+        {%for item in question_data%}
+        <li>
+            {{item}}
+        </li>
+        {%endfor%}
+    </ol>
+
+</body>
+</html>
