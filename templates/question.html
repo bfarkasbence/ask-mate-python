@@ -6,13 +6,44 @@
 </head>
 <body>
 <h1>Questions:</h1>
-    <ol>
-        {%for item in question_data%}
-        <li>
-            {{item}}
-        </li>
+    <table border="1">
+        <tr align="center">
+            <td>ID</td>
+            <td>Subsmisson time</td>
+            <td>View number</td>
+            <td>Vote number</td>
+            <td>Title</td>
+            <td>Message</td>
+            <td>Image</td>
+        </tr>
+        <tr>
+            {%for item in question_data%}
+            <td align="center">
+                {{item}}
+            </td>
+            {%endfor%}
+        </tr>
+    </table>
+    <h1>Answers:</h1>
+    <table border="1">
+        <tr align="center">
+            <td>ID</td>
+            <td>Subsmisson time</td>
+            <td>Vote number</td>
+            <td>Question ID</td>
+            <td>Message</td>
+            <td>Image</td>
+        </tr>
+        {%for item in answers_data%}
+        <tr>
+            {%for data in item.values()%}
+            <td align="center">
+                {{data}}
+            </td>
+            {%endfor%}
+        </tr>
         {%endfor%}
-    </ol>
+    </table>
 
 </body>
 </html>
