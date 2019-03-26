@@ -8,9 +8,7 @@ def get_data_from_file_question(filename):
     with open(filename,"r") as file:
         result = []
         stories = csv.DictReader(file,fieldnames=DATA_HEADER_QUESTION)
-        print(stories)
         for row in stories:
-            print(row)
             result.append(dict(row))
         return result
 
@@ -22,5 +20,3 @@ def get_data_from_file_answer(filename):
         for row in stories:
             result.append(dict(row))
         return result
-
-print(get_data_from_file_question("sample_data/answer.csv"))
