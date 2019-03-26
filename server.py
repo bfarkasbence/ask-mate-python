@@ -17,6 +17,9 @@ def questions_id(question_id):
     answers_data = data_manager.get_list_of_answers(question_id)
     return render_template("question.html", question_data=question_data,answers_data=answers_data)
 
+@app.route("/add-question")
+def add_question():
+    return render_template("add-question.html")
 
 
 if __name__ == "__main__":
