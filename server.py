@@ -47,6 +47,14 @@ def route_add_answer(question_id):
         return redirect(url_for("route_questions_id",question_id=question_id))
     return render_template("add-answer.html",question_id=question_id)
 
+@app.route("/questions/<question_id>/delete",methods=['GET', 'POST'])
+def delete_question(question_id):
+    if request.method == 'POST':
+        delete_question = request.form['delete_question']
+        print(delete_question)
+    return render_template("delete-question.html",question_id=question_id)
+
+
 
 
 if __name__ == "__main__":
