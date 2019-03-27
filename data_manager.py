@@ -1,4 +1,5 @@
 import connection
+import time
 
 def get_list_of_questions():
     list_of_dic = connection.get_data_from_file("sample_data/question.csv")
@@ -35,7 +36,7 @@ def get_number_of_all_questions():
 
 
 def complement_new_question_data(data_from_file, basic_data):
-    new_data = {"id": get_number_of_all_questions(), "submission_time": None, "view_number": '0', "vote_number": '0', "title": basic_data['title'], "message": basic_data['message'], "image": basic_data['image']}
+    new_data = {"id": get_number_of_all_questions(), "submission_time": time.time(), "view_number": '0', "vote_number": '0', "title": basic_data['title'], "message": basic_data['message'], "image": basic_data['image']}
     data_to_file = []
     data_to_file.append(new_data)
     data_to_file = data_to_file + data_from_file[1:]
