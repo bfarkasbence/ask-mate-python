@@ -26,3 +26,18 @@ def get_list_of_answers(question_id):
             result.append(item)
     return result
 
+
+def get_number_of_all_questions():
+    number = connection.get_data_from_file("sample_data/number.csv")
+    number[1]['number'] = int(number[1]['number']) + 1
+    connection.write_data_to_file("sample_data/number.csv", number[1:])
+    return number[1]["number"]
+
+
+def complement_new_question_data(data_from_file, basic_data):
+    new_data = {"id": get_number_of_all_questions(), "submission_time": None, "view_number": '0', "vote_number": '0', "title": basic_data['title'], "message": basic_data['message'], "image": basic_data['image']}
+    data_to_file = []
+    data_to_file.append(new_data)
+    data_to_file = data_to_file + data_from_file[1:]
+    return data_to_file
+

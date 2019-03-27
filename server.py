@@ -5,6 +5,7 @@ app = Flask(__name__)
 new_question_data = {}
 
 import data_manager
+import connection
 
 @app.route('/')
 @app.route("/list")
@@ -26,6 +27,8 @@ def route_add_question():
         new_question_data['title'] = request.form['title']
         new_question_data['message'] = request.form['message']
         new_question_data['image'] = request.form['image']
+        list_of_questions = data_manager.complement_new_question_data(connection.get_data_from_file('sample_data/question.csv'), new_question_data)
+        connection.write_data_to_file('sample_data/question.csv', list_of_questions)
         return redirect('/')
 
     return render_template("add-question.html")
