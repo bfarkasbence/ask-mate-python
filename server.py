@@ -45,7 +45,7 @@ def route_add_answer(question_id):
         list_of_answers = data_manager.complement_new_answer_data(connection.get_data_from_file('sample_data/answer.csv'), new_answer_data,question_id)
         connection.write_data_to_file('sample_data/answer.csv', list_of_answers)
         return redirect(url_for("route_questions_id",question_id=question_id))
-    return render_template("add-answer.html")
+    return render_template("add-answer.html",question_id=question_id)
 
 
 
