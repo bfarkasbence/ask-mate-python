@@ -1,8 +1,8 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect,url_for
 
 app = Flask(__name__)
 
-new_question_data = {}
+
 
 import data_manager
 import connection
@@ -20,11 +20,12 @@ def route_list_of_questions():
 def route_questions_id(question_id):
     question_data = data_manager.get_question_data_by_ID(question_id)
     answers_data = data_manager.get_list_of_answers(question_id)
-    return render_template("question.html", question_data=question_data,answers_data=answers_data)
+    return render_template("question.html", question_data=question_data,answers_data=answers_data,question_id=question_id)
 
 
 @app.route("/add-question", methods=['GET', 'POST'])
 def route_add_question():
+    new_question_data = {}
     if request.method == 'POST':
         new_question_data['title'] = request.form['title']
         new_question_data['message'] = request.form['message']
@@ -34,6 +35,18 @@ def route_add_question():
         return redirect('/')
 
     return render_template("add-question.html")
+
+@app.route("/questions/<question_id>/new-answer",methods=['GET', 'POST'])
+def route_add_answer(question_id):
+    new_answer_data = {}
+    if request.method == 'POST':
+        new_answer_data['message'] = request.form['message']
+        new_answer_data['image'] = request.form['image']
+        list_of_answers = data_manager.complement_new_answer_data(connection.get_data_from_file('sample_data/answer.csv'), new_answer_data,question_id)
+        connection.write_data_to_file('sample_data/answer.csv', list_of_answers)
+        return redirect(url_for("route_questions_id",question_id=question_id))
+    return render_template("add-answer.html")
+
 
 
 if __name__ == "__main__":

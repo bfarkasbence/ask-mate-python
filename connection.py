@@ -12,7 +12,9 @@ def get_data_from_file(filename):
             stories = csv.DictReader(file,fieldnames=DATA_HEADER_QUESTION)
         elif filename == "sample_data/answer.csv":
             stories = csv.DictReader(file, fieldnames=DATA_HEADER_ANSWER)
-        elif filename == "sample_data/number.csv":
+        elif filename == "sample_data/question_number.csv":
+            stories = csv.DictReader(file, fieldnames=DATA_HEADER_NUMBER)
+        elif filename == "sample_data/answer_number.csv":
             stories = csv.DictReader(file, fieldnames=DATA_HEADER_NUMBER)
         for row in stories:
             result.append(dict(row))
@@ -25,7 +27,9 @@ def write_data_to_file(filename, list_of_dicts):
             stories = csv.DictWriter(file, fieldnames=DATA_HEADER_QUESTION)
         elif filename == "sample_data/answer.csv":
             stories = csv.DictWriter(file, fieldnames=DATA_HEADER_ANSWER)
-        elif filename == "sample_data/number.csv":
+        elif filename == "sample_data/question_number.csv":
+            stories = csv.DictWriter(file, fieldnames=DATA_HEADER_NUMBER)
+        elif filename == "sample_data/answer_number.csv":
             stories = csv.DictWriter(file, fieldnames=DATA_HEADER_NUMBER)
         stories.writeheader()
         for row in list_of_dicts:
