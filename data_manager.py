@@ -17,6 +17,7 @@ def get_question_data_by_ID(Id):
                 result.append(value)
     return result
 
+
 def get_list_of_answers(question_id):
     list_of_dic = connection.get_data_from_file("sample_data/answer.csv")
     result = []
