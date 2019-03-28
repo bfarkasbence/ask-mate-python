@@ -10,7 +10,7 @@ def get_list_of_anything(thing):
     return result
 
 
-def get_question_data_by_ID(Id):
+def get_question_data_by_id(Id):
     list_of_dic = connection.get_data_from_file("sample_data/question.csv")
     result = []
     for item in list_of_dic[1:]:

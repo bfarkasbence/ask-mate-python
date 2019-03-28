@@ -1,9 +1,8 @@
 from flask import Flask, render_template, request, redirect, url_for
-
-app = Flask(__name__)
-
 import data_manager
 import connection
+
+app = Flask(__name__)
 
 
 @app.route('/')
@@ -16,7 +15,7 @@ def route_list_of_questions():
 
 @app.route("/questions/<question_id>")
 def route_questions_id(question_id):
-    question_data = data_manager.get_question_data_by_ID(question_id)
+    question_data = data_manager.get_question_data_by_id(question_id)
     answers_data = data_manager.get_list_of_answers(question_id)
     return render_template("question.html", question_data=question_data, answers_data=answers_data,
                            question_id=question_id)

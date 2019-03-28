@@ -18,9 +18,9 @@
     </tr>
     <tr>
         {% for item in question_data %}
-            <td align="center">
-                {{ item }}
-            </td>
+        <td align="center">
+            {{ item }}
+        </td>
         {% endfor %}
     </tr>
 </table>
@@ -35,13 +35,13 @@
         <td>Image</td>
     </tr>
     {% for item in answers_data %}
-        <tr>
-            {% for data in item.values() %}
-                <td align="center">
-                    {{ data }}
-                </td>
-            {% endfor %}
-        </tr>
+    <tr>
+        {% for data in item.values() %}
+        <td align="center">
+            {{ data }}
+        </td>
+        {% endfor %}
+    </tr>
     {% endfor %}
 </table>
 <br>
