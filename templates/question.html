@@ -6,46 +6,53 @@
 </head>
 <body>
 <h1>Questions:</h1>
-    <table border="1">
-        <tr align="center">
-            <td>ID</td>
-            <td>Subsmisson time</td>
-            <td>View number</td>
-            <td>Vote number</td>
-            <td>Title</td>
-            <td>Message</td>
-            <td>Image</td>
-        </tr>
-        <tr>
-            {%for item in question_data%}
+<table border="1">
+    <tr align="center">
+        <td>ID</td>
+        <td>Subsmisson time</td>
+        <td>View number</td>
+        <td>Vote number</td>
+        <td>Title</td>
+        <td>Message</td>
+        <td>Image</td>
+    </tr>
+    <tr>
+        {% for item in question_data %}
             <td align="center">
-                {{item}}
+                {{ item }}
             </td>
-            {%endfor%}
-        </tr>
-    </table>
-    <h1>Answers:</h1>
-    <table border="1">
-        <tr align="center">
-            <td>ID</td>
-            <td>Subsmisson time</td>
-            <td>Vote number</td>
-            <td>Question ID</td>
-            <td>Message</td>
-            <td>Image</td>
-        </tr>
-        {%for item in answers_data%}
+        {% endfor %}
+    </tr>
+</table>
+<h1>Answers:</h1>
+<table border="1">
+    <tr align="center">
+        <td>ID</td>
+        <td>Subsmisson time</td>
+        <td>Vote number</td>
+        <td>Question ID</td>
+        <td>Message</td>
+        <td>Image</td>
+    </tr>
+    {% for item in answers_data %}
         <tr>
-            {%for data in item.values()%}
-            <td align="center">
-                {{data}}
-            </td>
-            {%endfor%}
+            {% for data in item.values() %}
+                <td align="center">
+                    {{ data }}
+                </td>
+            {% endfor %}
         </tr>
-        {%endfor%}
-    </table><br>
-<a href="/questions/{{question_id}}/new-answer"> <button type="button">Add answer!</button></a><br>
-<a href="/"> <button type="button">Back to questions.</button></a>
-<a href="/questions/{{question_id}}/delete"> <button type="button">Delete questions.</button></a>
+    {% endfor %}
+</table>
+<br>
+<a href="/questions/{{ question_id }}/new-answer">
+    <button type="button">Add answer!</button>
+</a><br>
+<a href="/">
+    <button type="button">Back to questions.</button>
+</a>
+<a href="/questions/{{ question_id }}/delete">
+    <button type="button">Delete questions.</button>
+</a>
 </body>
 </html>
