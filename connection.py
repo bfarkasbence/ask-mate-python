@@ -6,10 +6,10 @@ DATA_HEADER_NUMBER = ["number"]
 
 
 def get_data_from_file(filename):
-    with open(filename,"r") as file:
+    with open(filename, "r") as file:
         result = []
         if filename == "sample_data/question.csv":
-            stories = csv.DictReader(file,fieldnames=DATA_HEADER_QUESTION)
+            stories = csv.DictReader(file, fieldnames=DATA_HEADER_QUESTION)
         elif filename == "sample_data/answer.csv":
             stories = csv.DictReader(file, fieldnames=DATA_HEADER_ANSWER)
         elif filename == "sample_data/question_number.csv":
