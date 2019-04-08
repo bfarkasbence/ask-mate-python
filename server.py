@@ -53,7 +53,7 @@ def route_add_answer(question_id):
 def delete_question(question_id):
     if request.method == 'POST':
         delete_question = request.form['delete_question']
-        print(delete_question)
+
     return render_template("delete-question.html", question_id=question_id)
 
 
