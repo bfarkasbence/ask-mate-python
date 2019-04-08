@@ -27,14 +27,7 @@ def route_add_question_form():
 
 @app.route("/add-question", methods=['POST'])
 def route_add_question():
-    new_question_data = {
-        'title': request.form['title'][:100],
-        'message': request.form['message'],
-        'image': request.form['image']
-    }
-    list_of_questions = data_manager.complement_new_question_data(
-        connection.get_data_from_file('sample_data/question.csv'), new_question_data)
-    connection.write_data_to_file('sample_data/question.csv', list_of_questions)
+    data_manager.complement_new_question_data(request.form['title'], request.form['message'], request.form['image'])
     return redirect('/')
 
 
