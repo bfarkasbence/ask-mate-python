@@ -8,32 +8,34 @@ app = Flask(__name__)
 @app.route('/')
 @app.route("/list")
 def route_list_of_questions():
-    list_of_questions = data_manager.get_list_of_anything("title")
-    list_of_ids = data_manager.get_list_of_anything("id")
-    return render_template("list.html", list_of_questions=list_of_questions, list_of_ids=list_of_ids)
+    questions = data_manager.get_questions()
+    return render_template("list.html", list_of_questions=questions)
 
 
 @app.route("/questions/<question_id>")
-def route_questions_id(question_id):
+def route_question(question_id):
     question_data = data_manager.get_question_data_by_id(question_id)
     answers_data = data_manager.get_list_of_answers(question_id)
     return render_template("question.html", question_data=question_data, answers_data=answers_data,
                            question_id=question_id)
 
 
-@app.route("/add-question", methods=['GET', 'POST'])
-def route_add_question():
-    new_question_data = {}
-    if request.method == 'POST':
-        new_question_data['title'] = request.form['title']
-        new_question_data['message'] = request.form['message']
-        new_question_data['image'] = request.form['image']
-        list_of_questions = data_manager.complement_new_question_data(
-            connection.get_data_from_file('sample_data/question.csv'), new_question_data)
-        connection.write_data_to_file('sample_data/question.csv', list_of_questions)
-        return redirect('/')
-
+@app.route("/add-question", methods=['GET'])
+def route_add_question_form():
     return render_template("add-question.html")
+
+
+@app.route("/add-question", methods=['POST'])
+def route_add_question():
+    new_question_data = {
+        'title': request.form['title'][:100],
+        'message': request.form['message'],
+        'image': request.form['image']
+    }
+    list_of_questions = data_manager.complement_new_question_data(
+        connection.get_data_from_file('sample_data/question.csv'), new_question_data)
+    connection.write_data_to_file('sample_data/question.csv', list_of_questions)
+    return redirect('/')
 
 
 @app.route("/questions/<question_id>/new-answer", methods=['GET', 'POST'])
@@ -42,10 +44,9 @@ def route_add_answer(question_id):
     if request.method == 'POST':
         new_answer_data['message'] = request.form['message']
         new_answer_data['image'] = request.form['image']
-        list_of_answers = data_manager.complement_new_answer_data(
-            connection.get_data_from_file('sample_data/answer.csv'), new_answer_data, question_id)
-        connection.write_data_to_file('sample_data/answer.csv', list_of_answers)
-        return redirect(url_for("route_questions_id", question_id=question_id))
+        data_manager.save_answer(new_answer_data, question_id)
+
+        return redirect(url_for("route_question", question_id=question_id))
     return render_template("add-answer.html", question_id=question_id)
 
 

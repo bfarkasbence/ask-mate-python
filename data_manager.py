@@ -2,22 +2,20 @@ import connection
 import time
 
 
-def get_list_of_anything(thing):
+def get_questions():
     list_of_dic = connection.get_data_from_file("sample_data/question.csv")
     result = []
     for item in list_of_dic[1:]:
-        result.append(item.get(thing))
+        result.append(item)
     return result
 
 
-def get_question_data_by_id(Id):
-    list_of_dic = connection.get_data_from_file("sample_data/question.csv")
-    result = []
-    for item in list_of_dic[1:]:
-        if item["id"] == str(Id):
-            for value in item.values():
-                result.append(value)
-    return result
+def get_question_data_by_id(id):
+    questions = get_questions()
+    for question in questions:
+        if question['id'] == str(id):
+            return question
+    return None
 
 
 def get_list_of_answers(question_id):
@@ -54,3 +52,9 @@ def complement_new_answer_data(data_from_file, basic_data, question_id):
     data_to_file.append(new_data)
     data_to_file = data_to_file + data_from_file[1:]
     return data_to_file
+
+
+def save_answer(new_answer_data, question_id):
+    list_of_questions = complement_new_answer_data(
+        connection.get_data_from_file('sample_data/answer.csv'), new_answer_data,question_id)
+    connection.write_data_to_file('sample_data/answer.csv', list_of_questions)
