@@ -32,12 +32,12 @@ def get_question_data_by_id(cursor, id):
 
 
 @connection.connection_handler
-def get_list_of_answers(cursor, id):
+def get_list_of_answers(cursor, question_id):
     cursor.execute("""
                     SELECT * FROM answer
-                    WHERE id = %(id)s;
+                    WHERE question_id = %(question_id)s;
                    """,
-                   {'id': id})
+                   {'question_id': question_id})
     answers = cursor.fetchall()
     return answers
 
