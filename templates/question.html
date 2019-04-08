@@ -18,9 +18,11 @@
     </tr>
     <tr>
         {% for item in question_data %}
-        <td align="center">
-            {{ item }}
-        </td>
+            {% for data in item.values() %}
+            <td align="center">
+                {{ data }}
+            </td>
+            {% endfor %}
         {% endfor %}
     </tr>
 </table>

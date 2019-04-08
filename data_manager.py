@@ -2,6 +2,36 @@ import connection
 import time
 
 
+@connection.connection_handler
+def get_questions(cursor):
+    cursor.execute("""
+                    SELECT * FROM question;
+                   """,)
+    questions = cursor.fetchall()
+    return questions
+
+
+@connection.connection_handler
+def get_question_data_by_id(cursor, id):
+    cursor.execute("""
+                    SELECT * FROM question
+                    WHERE id = %(id)s;
+                   """,
+                   {'id': id})
+    question = cursor.fetchall()
+    return question
+
+
+@connection.connection_handler
+def get_list_of_answers(cursor, id):
+    cursor.execute("""
+                    SELECT * FROM answer
+                    WHERE id = %(id)s;
+                   """,
+                   {'id': id})
+    answers = cursor.fetchall()
+    return answers
+"""
 def get_questions():
     list_of_dic = connection.get_data_from_file("sample_data/question.csv")
     result = []
@@ -25,6 +55,7 @@ def get_list_of_answers(question_id):
         if question_id == item['question_id']:
             result.append(item)
     return result
+"""
 
 
 def get_number_of_all_questions(file):
