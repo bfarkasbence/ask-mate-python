@@ -35,6 +35,7 @@
         <td>Question ID</td>
         <td>Message</td>
         <td>Image</td>
+        <td> </td>
     </tr>
     {% for item in answers_data %}
     <tr>
@@ -43,6 +44,9 @@
             {{ data }}
         </td>
         {% endfor %}
+        <td>
+            <a href="/answer/{{ item.id }}/edit"><button type="button">Edit answer!</button></a>
+        </td>
     </tr>
     {% endfor %}
 </table>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Editing answer</title>
+</head>
+<body>
+<h1>Edit answer:</h1>
+    <table>
+    <form action="/answer/{{ answer_id }}/edit" method="post">
+    <tr>
+        <td>Message:</td>
+        <td><textarea name="message" rows="10" cols="30" min="10" max="500">{{ answer.message }}</textarea></td>
+    </tr>
+    <tr>
+        <td>Image:</td>
+        <td><input type="file" name="image"></td>
+    </tr>
+    <tr>
+        <td><button type="submit">Send!</button></td>
+    </tr>
+    </form>
+    </table><br>
+    <a href="/list"> <button type="button">Back to questions.</button></a>
+
+</body>
+</html>

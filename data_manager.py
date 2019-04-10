@@ -19,6 +19,14 @@ def get_questions(cursor):
     questions = cursor.fetchall()
     return questions
 
+@connection.connection_handler
+def get_answer_message(cursor,answer_id):
+    cursor.execute("""
+                    SELECT message FROM answer
+                    WHERE id = %(answer_id)s;
+                   """, {'answer_id': int(answer_id)})
+    return cursor.fetchone()
+
 
 @connection.connection_handler
 def get_question_data_by_id(cursor, id):
@@ -58,3 +66,11 @@ def complement_new_answer_data(cursor, message, image, question_id):
                     INSERT INTO answer ("submission_time", "vote_number", "question_id", "message", "image")
                     VALUES  (%(submission_time)s, 0, %(question_id)s, %(message)s, %(image)s); """,
                    {"submission_time": submission_time, "question_id": question_id, "message": message, "image": image})
+
+@connection.connection_handler
+def edit_existing_answer_data(cursor,new_message,answer_id):
+    cursor.execute("""
+                        UPDATE answer set message = %(new_message)s
+                        WHERE id = %(answer_id)s;
+                        """,
+                   {"new_message": new_message,"answer_id":answer_id })
