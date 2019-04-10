@@ -12,10 +12,13 @@ def get_submission_time():
 
 
 @connection.connection_handler
-def get_questions(cursor):
+def get_questions(cursor, number_of_questions=None):
     cursor.execute("""
-                    SELECT * FROM question;
-                   """,)
+                    SELECT * FROM question
+                    ORDER BY submission_time DESC 
+                   LIMIT %(number_of_questions)s;
+                   """,
+                   {'number_of_questions': number_of_questions})
     questions = cursor.fetchall()
     return questions
 

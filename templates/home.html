@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Latest Questions</title>
+</head>
+<body>
+<h1>Questions:</h1>
+<ol>
+    {% for question in list_of_questions %}
+        <li>
+            <a href="{{ url_for('route_question', question_id=question.id) }}">{{ question.title }}</a>
+        </li>
+    {% endfor %}
+</ol>
+<a href="/add-question">
+    <button type="button">Ask a question!</button>
+</a>
+<a href="/list">
+    <button type="button">All questions</button>
+</a>
+</body>
+</html>

@@ -4,11 +4,16 @@ import data_manager
 app = Flask(__name__)
 
 
-@app.route('/')
 @app.route("/list")
 def route_list_of_questions():
     questions = data_manager.get_questions()
     return render_template("list.html", list_of_questions=questions)
+
+
+@app.route('/')
+def route_list_of_latest_questions():
+    questions = data_manager.get_questions(5)
+    return render_template("home.html", list_of_questions=questions)
 
 
 @app.route("/questions/<question_id>")
@@ -27,7 +32,7 @@ def route_add_question_form():
 @app.route("/add-question", methods=['POST'])
 def route_add_question():
     data_manager.complement_new_question_data(request.form['title'], request.form['message'], request.form['image'])
-    return redirect('/')
+    return redirect('/list')
 
 
 @app.route("/questions/<question_id>/new-answer", methods=['GET'])
