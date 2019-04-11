@@ -66,5 +66,12 @@ def editing_answers(answer_id):
     return render_template("edit-answer.html",answer=answer,answer_id=answer_id)
 
 
+@app.route("/search")
+def searching_data():
+    search_phrase = "%" + request.args.get('search_box') + "%"
+    searching = data_manager.searching_data(search_phrase)
+    return render_template("search.html", searching=searching)
+
+
 if __name__ == "__main__":
     app.run(debug=True, port=5000)

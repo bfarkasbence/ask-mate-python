@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>Search Results:</h1>
+    <ol>
+        {% for search in searching %}
+            <a href="questions/{{ search.id }}"</a>
+        <li>
+            {{ search.title }}
+
+        </li>
+    {% endfor %}
+</ol>
+<a href="/list">
+    <button type="button" class="myButton">Back to questions</button>
+</body>
+</html>

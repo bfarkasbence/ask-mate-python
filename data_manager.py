@@ -85,3 +85,16 @@ def edit_existing_answer_data(cursor,new_message,answer_id):
                         WHERE id = %(answer_id)s;
                         """,
                    {"new_message": new_message,"answer_id":answer_id })
+
+
+@connection.connection_handler
+def searching_data(cursor,phrase):
+    cursor.execute("""
+                        SELECT DISTINCT question.* FROM answer
+                        FULL JOIN question ON  answer.question_id = question.id
+                        WHERE answer.message ILIKE %(phrase)s OR  question.title ILIKE %(phrase)s OR question.message ILIKE %(phrase)s;
+                        """,
+                   {"phrase": phrase})
+    return cursor.fetchall()
+
+
