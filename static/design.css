@@ -38,6 +38,10 @@ table#table1 {
 	font-size: 40px;
 }
 
+tr#margin{
+	margin: 10px
+}
+
 
 .topborder{
 	border-top-style: solid;
