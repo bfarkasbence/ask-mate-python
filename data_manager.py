@@ -150,4 +150,11 @@ def vote_down(cursor, question_id, answer_id=None):
                         """, {"answer_id": answer_id})
 
 
+@connection.connection_handler
+def raise_view_number(cursor, question_id):
+    cursor.execute("""
+                    UPDATE question set view_number = view_number +1
+                    WHERE id = %(question_id)s;
+                    """, {"question_id": question_id})
+
 

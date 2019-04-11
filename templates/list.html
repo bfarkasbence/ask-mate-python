@@ -32,7 +32,7 @@
     {% for question in list_of_questions %}
         <tr id="margin">
         <td>
-                        <a href="{{ url_for('route_question', question_id=question.id) }}">{{ question.title }}</a><br>
+                        <a href="{{ url_for('raise_view_number', question_id=question.id) }}">{{ question.title }}</a><br>
         </td>
         </tr>
     {% endfor %}

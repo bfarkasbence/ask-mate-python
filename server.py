@@ -112,5 +112,11 @@ def vote_down_question(question_id):
     return redirect(url_for("route_question", question_id=question_id))
 
 
+@app.route("/questions/<question_id>/view_number")
+def raise_view_number(question_id):
+    data_manager.raise_view_number(question_id)
+    return redirect(url_for("route_question", question_id=question_id))
+
+
 if __name__ == "__main__":
     app.run(debug=True, port=5000)

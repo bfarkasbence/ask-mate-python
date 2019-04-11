@@ -20,7 +20,7 @@
         <table >
             {% for question in list_of_questions %}
                 <tr align="center">
-                    <td class="question-table"><a href="{{ url_for('route_question', question_id=question.id) }}">{{ question.title }}</a><br></td>
+                    <td class="question-table"><a href="{{ url_for('raise_view_number', question_id=question.id) }}">{{ question.title }}</a><br></td>
                 </tr>
             {% endfor %}
         </table>
