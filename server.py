@@ -58,10 +58,11 @@ def delete_question(question_id):
 
 @app.route("/answer/<answer_id>/edit", methods=['GET','POST'])
 def editing_answers(answer_id):
+    answer = data_manager.get_answer_message_and_question_id(answer_id)
+    question_id = answer["question_id"]
     if request.method=='POST':
         data_manager.edit_existing_answer_data(request.form['message'], answer_id)
-        return redirect('/list')
-    answer = data_manager.get_answer_message(answer_id)
+        return render_template('/list.html', question_id=question_id)
     return render_template("edit-answer.html",answer=answer,answer_id=answer_id)
 
 

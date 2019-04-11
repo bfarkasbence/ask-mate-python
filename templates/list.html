@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>List Questions</title>
+    <link rel="stylesheet" type="text/css" href="static/design.css">
 </head>
 <body>
 <h1>Questions:</h1>
@@ -14,7 +15,7 @@
     {% endfor %}
 </ol>
 <a href="/add-question">
-    <button type="button">Ask a question!</button>
+    <button type="button" class="myButton">Ask a question!</button>
 </a>
 
 <a href="/list?criteria=submission_time&direction=ASC">
