@@ -53,7 +53,8 @@ def get_question_data_by_id(cursor, id):
 def get_list_of_answers(cursor, question_id):
     cursor.execute("""
                     SELECT * FROM answer
-                    WHERE question_id = %(question_id)s;
+                    WHERE question_id = %(question_id)s
+                    ORDER BY vote_number DESC;
                    """,
                    {'question_id': question_id})
     answers = cursor.fetchall()
@@ -149,5 +150,12 @@ def vote_down(cursor, question_id, answer_id=None):
                         WHERE id = %(answer_id)s;                    
                         """, {"answer_id": answer_id})
 
+
+@connection.connection_handler
+def raise_view_number(cursor, question_id):
+    cursor.execute("""
+                    UPDATE question set view_number = view_number +1
+                    WHERE id = %(question_id)s;
+                    """, {"question_id": question_id})
 
 
