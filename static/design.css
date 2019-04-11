@@ -24,8 +24,17 @@ td{
 	padding: 10px;
 }
 
-.aligin-center{
+.align-center{
 	text-align: center;
+}
+
+.question-table{
+    border-top-style: solid;
+    border-top-width: 3px;
+	border-top-color:#802d05;
+	text-align: center;
+    margin: 10px;
+    font-size: 10px;
 }
 
 .topborder{
@@ -35,8 +44,9 @@ td{
 	text-align: center;
 }
 
-p {
-    line-height: 21px;
+.searchbox{
+    text-align: right;
+    margin: 10px 30px ;
 }
 
 h1 {
@@ -72,7 +82,6 @@ a {
 	text-decoration: None;
     font-size: 30px;
     color:#1a0901;
-    font-style: oblique;
 }
 
 li {

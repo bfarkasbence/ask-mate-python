@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Display a question</title>
     <link rel="stylesheet" type="text/css" href="/static/design.css">
+    <link rel="shortcut icon" href="/static/logo.ico" />
 </head>
 <body>
 <h1>Question:</h1>
@@ -48,10 +49,13 @@
         <td class="topborder">
             <a href="/answer/{{ item.id }}/edit"><button type="button" class="button">Edit answer!</button></a>
         </td>
+        <td class="topborder">
+            <a href="/answer/{{ item.question_id }}/{{ item.id }}/delete"><button type="button" class="button">Delete answer!</button></a>
+         </td>
     </tr>
     {% endfor %}
 </table>
-<div class="aligin-center">
+<div class="align-center">
 <a href="/questions/{{ question_id }}/new-answer">
     <button type="button" class="button">Add answer!</button>
 </a>
