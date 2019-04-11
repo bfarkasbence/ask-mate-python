@@ -88,5 +88,29 @@ def searching_data():
     return render_template("search.html", searching=searching)
 
 
+@app.route("/answer/<question_id>/<answer_id>/like")
+def vote_up_answer(answer_id, question_id):
+    data_manager.vote_up(question_id, answer_id)
+    return redirect(url_for("route_question", question_id=question_id))
+
+
+@app.route("/answer/<question_id>/<answer_id>/dislike")
+def vote_down_answer(question_id, answer_id):
+    data_manager.vote_down(question_id, answer_id)
+    return redirect(url_for("route_question", question_id=question_id))
+
+
+@app.route("/questions/<question_id>/like")
+def vote_up_question(question_id):
+    data_manager.vote_up(question_id)
+    return redirect(url_for("route_question", question_id=question_id))
+
+
+@app.route("/questions/<question_id>/dislike")
+def vote_down_question(question_id):
+    data_manager.vote_down(question_id)
+    return redirect(url_for("route_question", question_id=question_id))
+
+
 if __name__ == "__main__":
     app.run(debug=True, port=5000)

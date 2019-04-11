@@ -122,4 +122,32 @@ def delete_question_by_quesion_id(cursor, question_id):
                     """, {"question_id": question_id})
 
 
+@connection.connection_handler
+def vote_up(cursor, question_id, answer_id=None):
+    if answer_id is None:
+        cursor.execute("""
+                        UPDATE question set vote_number = vote_number +1
+                        WHERE id = %(question_id)s;                    
+                        """, {"question_id": question_id})
+    else:
+        cursor.execute("""
+                        UPDATE answer set vote_number = vote_number +1
+                        WHERE id = %(answer_id)s;                    
+                        """, {"answer_id": answer_id})
+
+
+@connection.connection_handler
+def vote_down(cursor, question_id, answer_id=None):
+    if answer_id is None:
+        cursor.execute("""
+                        UPDATE question set vote_number = vote_number -1
+                        WHERE id = %(question_id)s;                    
+                        """, {"question_id": question_id})
+    else:
+        cursor.execute("""
+                        UPDATE answer set vote_number = vote_number -1
+                        WHERE id = %(answer_id)s;                    
+                        """, {"answer_id": answer_id})
+
+
 
