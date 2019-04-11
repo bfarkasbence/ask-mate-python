@@ -14,12 +14,22 @@
     <button type="submit">Search</button></a>
     </form>
 </div>
-<table >
-    {% for question in list_of_questions %}
-        <tr align="center">
-            <td class="question-table"><a href="{{ url_for('route_question', question_id=question.id) }}">{{ question.title }}</a><br></td>
-        </tr>
-    {% endfor %}
+<table>
+<tr>
+    <td>
+        <table >
+            {% for question in list_of_questions %}
+                <tr align="center">
+                    <td class="question-table"><a href="{{ url_for('route_question', question_id=question.id) }}">{{ question.title }}</a><br></td>
+                </tr>
+            {% endfor %}
+        </table>
+    </td>
+    <td>
+        <img src="/static/logo.png" alt="logo" width="200">
+    </td>
+</tr>
+
 </table>
 <div class="align-center">
 <a href="/add-question">

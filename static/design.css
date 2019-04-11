@@ -28,14 +28,16 @@ td{
 	text-align: center;
 }
 
-.question-table{
-    border-top-style: solid;
-    border-top-width: 3px;
-	border-top-color:#802d05;
-	text-align: center;
-    margin: 10px;
-    font-size: 10px;
+table#table1 {
+    width: auto;
+	height: auto;
 }
+
+.delete-div{
+	align-content: center;
+	font-size: 40px;
+}
+
 
 .topborder{
 	border-top-style: solid;

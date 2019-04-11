@@ -4,13 +4,12 @@
     <meta charset="UTF-8">
     <title>Delete Answer</title>
     <link rel="stylesheet" type="text/css" href="/static/design.css">
-
+    <link rel="shortcut icon" href="/static/logo.ico" />
 </head>
-<a>
-    Do you really want to delete this answer?
-    <br>
-    <a href="/questions/{{question_id}}/{{answer_id}}/delete?confirm=True"><button type="submit" class="button">YES</button></a>
+<h1>Do you really want to delete this answer?</h1>
+<div class="align-center">
+    <a href="/answer/{{question_id}}/{{answer_id}}/delete?confirm=True"><button type="submit" class="button">YES</button></a>
     <a href="/questions/{{question_id}}"> <button type="button" class="button">NO</button></a>
-
+</div>
 </body>
 </html>

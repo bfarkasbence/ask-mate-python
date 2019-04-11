@@ -25,24 +25,29 @@
                 {{ data }}
             </td>
             {% endfor %}
+        <td>
+            <a href="/questions/{{ item.id }}/like"><button type="button" class="button">Like.</button></a>
+        </td>
+        <td>
+            <a href="/questions/{{ item.id }}/dislike"><button type="button" class="button">Dislike.</button></a>
+        </td>
         {% endfor %}
     </tr>
 </table>
 <h2>Answers:</h2>
-<table border="1">
-    <tr align="center">
+<table id="table1">
+    <tr>
         <th>ID</th>
         <th>Submission time</th>
         <th>Vote number</th>
         <th>Question ID</th>
         <th>Message</th>
         <th>Image</th>
-        <th> </th>
     </tr>
     {% for item in answers_data %}
     <tr>
         {% for data in item.values() %}
-        <td align="center" class="topborder">
+        <td class="topborder" >
             {{ data }}
         </td>
         {% endfor %}
@@ -52,6 +57,12 @@
         <td class="topborder">
             <a href="/answer/{{ item.question_id }}/{{ item.id }}/delete"><button type="button" class="button">Delete answer!</button></a>
          </td>
+        <td class= "topborder">
+            <a href="/answer/{{ item.question_id }}/{{ item.id }}/like"><button type="button" class="button">Like.</button></a>
+        </td>
+        <td class="topborder">
+            <a href="/answer/{{ item.question_id }}/{{ item.id }}/dislike"><button type="button" class="button">Dislike.</button></a>
+        </td>
     </tr>
     {% endfor %}
 </table>
