@@ -48,15 +48,17 @@ def route_add_answer(question_id):
     return redirect(url_for("route_question", question_id=question_id))
 
 
-@app.route("/questions/<question_id>/delete", methods=['GET', 'POST'])
+@app.route("/questions/<question_id>/delete")
 def delete_question(question_id):
-    if request.method == 'POST':
-        delete_question = request.form['delete_question']
-
+    delete_question_confirm = request.args.get('confirm', False)
+    if delete_question_confirm == "True":
+        data_manager.delete_answer_by_question_id(question_id)
+        data_manager.delete_question_by_quesion_id(question_id)
+        return redirect('/list')
     return render_template("delete-question.html", question_id=question_id)
 
 
-@app.route("/answer/<answer_id>/edit", methods=['GET','POST'])
+@app.route("/answer/<answer_id>/edit", methods=['GET', 'POST'])
 def editing_answers(answer_id):
     answer = data_manager.get_answer_message_and_question_id(answer_id)
     question_id = answer["question_id"]
