@@ -98,3 +98,22 @@ def searching_data(cursor,phrase):
     return cursor.fetchall()
 
 
+@connection.connection_handler
+def delete_answer_by_question_id(cursor, question_id):
+    cursor.execute("""
+                    DELETE FROM answer
+                    WHERE question_id = %(question_id)s;
+                    """, {"question_id": question_id})
+    return
+
+
+@connection.connection_handler
+def delete_question_by_quesion_id(cursor, question_id):
+    cursor.execute("""
+                    DELETE FROM question
+                    WHERE id = %(question_id)s;
+                    """, {"question_id": question_id})
+    return
+
+
+
