@@ -53,7 +53,8 @@ def get_question_data_by_id(cursor, id):
 def get_list_of_answers(cursor, question_id):
     cursor.execute("""
                     SELECT * FROM answer
-                    WHERE question_id = %(question_id)s;
+                    WHERE question_id = %(question_id)s
+                    ORDER BY vote_number DESC;
                    """,
                    {'question_id': question_id})
     answers = cursor.fetchall()
