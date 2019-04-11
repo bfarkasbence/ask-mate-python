@@ -58,6 +58,15 @@ def delete_question(question_id):
     return render_template("delete-question.html", question_id=question_id)
 
 
+@app.route("/answer/<question_id>/<answer_id>/delete")
+def delete_answer(question_id, answer_id):
+    delete_answer_confirm = request.args.get('confirm', False)
+    if delete_answer_confirm == "True":
+        data_manager.delete_answer_by_id(answer_id)
+        return redirect(url_for("route_question", question_id=question_id))
+    return render_template("delete-answer.html", question_id=question_id, answer_id=answer_id)
+
+
 @app.route("/answer/<answer_id>/edit", methods=['GET'])
 def editing_answers(answer_id):
     answer = data_manager.get_answer_message_and_question_id(answer_id)
