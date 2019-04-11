@@ -20,7 +20,12 @@ th{
 }
 
 td{
-	border: transparent;
+	border:transparent;
+	padding: 10px;
+}
+
+.aligin-center{
+	text-align: center;
 }
 
 .topborder{
@@ -64,15 +69,16 @@ h2 {
 
 a {
     font-family: arial, helvetica, sans-serif;
+	text-decoration: None;
     font-size: 30px;
-    color: #802d05;
+    color:#1a0901;
     font-style: oblique;
 }
 
 li {
     text-align: left;
     font-size: 35px;
-    color: #802d05;
+    color: #1a0901;
 }
 
 .button {

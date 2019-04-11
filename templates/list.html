@@ -3,25 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>List Questions</title>
+    <link rel="shortcut icon" href="static/logo.ico" />
     <link rel="stylesheet" type="text/css" href="static/design.css">
 </head>
 <body>
 <h1>Questions:</h1>
-<ol>
-    {% for question in list_of_questions %}
-        <li>
-            <a href="{{ url_for('route_question', question_id=question.id) }}">{{ question.title }}</a>
-        </li>
-    {% endfor %}
-</ol>
-<a href="/add-question">
-    <button type="button" class="button">Ask a question!</button>
-</a>
-
+<div class="aligin-center">
 <a href="/list?criteria=submission_time&direction=ASC">
     <button type="button" class="button">Time A</button>
 </a>
-<a href="/list?criteria=submission_time&direction=DEC">
+<a href="/list?criteria=submission_time&direction=DESC">
     <button type="button" class="button">Time D</button>
 </a>
 <a href="/list?criteria=vote_number&direction=ASC">
@@ -36,7 +27,19 @@
 <a href="/list?criteria=view_number&direction=DESC">
     <button type="button" class="button">View number D</button>
 </a>
-
+</div>
+<table>
+    {% for question in list_of_questions %}
+        <tr>
+            <a href="{{ url_for('route_question', question_id=question.id) }}">{{ question.title }}</a><br>
+        </tr>
+    {% endfor %}
+</table>
+<div class="aligin-center">
+<a href="/add-question">
+    <button type="button" class="button">Ask a question!</button>
+</a>
+</div>
 
 </body>
 </html>
