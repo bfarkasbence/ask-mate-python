@@ -12,15 +12,22 @@ def get_submission_time():
 
 
 @connection.connection_handler
-def get_questions(cursor, number_of_questions=None):
+def get_questions(cursor, criteria, direction, number_of_questions=None):
     cursor.execute("""
                     SELECT * FROM question
-                    ORDER BY submission_time DESC 
+                    ORDER BY 
+                      CASE WHEN %(criteria)s='submission_time' AND %(direction)s='DESC' THEN submission_time END DESC,
+                      CASE WHEN %(criteria)s='submission_time' AND %(direction)s='ASC' THEN submission_time END ASC,                  
+                      CASE WHEN %(criteria)s='vote_number' AND %(direction)s='DESC' THEN vote_number END DESC,
+                      CASE WHEN %(criteria)s='vote_number' AND %(direction)s='ASC' THEN vote_number END ASC,
+                      CASE WHEN %(criteria)s='view_number' AND %(direction)s='DESC' THEN view_number END DESC,
+                      CASE WHEN %(criteria)s='view_number' AND %(direction)s='ASC' THEN view_number END ASC                        
                    LIMIT %(number_of_questions)s;
                    """,
-                   {'number_of_questions': number_of_questions})
+                   {'number_of_questions': number_of_questions, 'criteria': criteria, 'direction': direction})
     questions = cursor.fetchall()
     return questions
+
 
 @connection.connection_handler
 def get_answer_message_and_question_id(cursor,answer_id):
@@ -69,6 +76,7 @@ def complement_new_answer_data(cursor, message, image, question_id):
                     INSERT INTO answer ("submission_time", "vote_number", "question_id", "message", "image")
                     VALUES  (%(submission_time)s, 0, %(question_id)s, %(message)s, %(image)s); """,
                    {"submission_time": submission_time, "question_id": question_id, "message": message, "image": image})
+
 
 @connection.connection_handler
 def edit_existing_answer_data(cursor,new_message,answer_id):
