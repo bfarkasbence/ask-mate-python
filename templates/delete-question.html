@@ -3,14 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Delete question</title>
+    <link rel="stylesheet" type="text/css" href="/static/design.css">
+
 </head>
 <body>
     Do you really want to delete this question?
     <form action="" method="post">
     <input type="checkbox" name="delete_question" checked>Delete question</input>
-    <button type="submit">Really?</button>
+    <button type="submit" class="button">Really?</button>
     </form>
-    <a href="/questions/{{question_id}}"> <button type="button">Back to question</button></a>
+    <a href="/questions/{{question_id}}"> <button type="button" class="button">Back to question</button></a>
 
 </body>
 </html>

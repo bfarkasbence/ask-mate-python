@@ -7,6 +7,28 @@ body {
     padding: 0;
 }
 
+table{
+	border: transparent;
+	width:70%;
+    margin-left:15%;
+    margin-right:15%;;
+}
+
+th{
+	border: transparent;
+	text-align: center;
+}
+
+td{
+	border: transparent;
+}
+
+.topborder{
+	border-top-style: solid;
+    border-top-width: 3px;
+	border-top-color:#802d05;
+	text-align: center;
+}
 
 p {
     line-height: 21px;
@@ -23,22 +45,21 @@ h1 {
     text-align: center;
     letter-spacing: 0.5em;
     border-bottom-style: solid;
-    border-bottom-width: 0.5em;
+    border-bottom-width: 12px;
     border-bottom-color: #802d05;
 }
 
 h2 {
     color: white;
-    background-color: #be4f0c;
+    background-color: #1a0901;
     font-size: 1.5em;
-    margin: 0;
+    margin: 30px;
     padding: 2px;
     padding-left: 14px;
-}
-
-strong {
-    font-style: italic;
-    text-transform: uppercase;
+	border-bottom-style: solid;
+	border-bottom-width: 5px;
+    border-bottom-color: #802d05;
+	text-align: center;
 }
 
 a {
@@ -54,7 +75,7 @@ li {
     color: #802d05;
 }
 
-.myButton {
+.button {
 	-moz-box-shadow:inset 0px 1px 0px 0px #ff5b09;
 	-webkit-box-shadow:inset 0px 1px 0px 0px #ff5b09;
 	box-shadow:inset 0px 1px 0px 0px #ff5b09;
@@ -79,7 +100,7 @@ li {
 	text-decoration:none;
 	text-shadow:0px 1px 0px #8c3205;
 }
-.myButton:hover {
+.button:hover {
 	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #993605), color-stop(1, #802e05));
 	background:-moz-linear-gradient(top, #993605 5%, #802e05 100%);
 	background:-webkit-linear-gradient(top, #993605 5%, #802e05 100%);
@@ -89,7 +110,7 @@ li {
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#993605', endColorstr='#802e05',GradientType=0);
 	background-color:#993605;
 }
-.myButton:active {
+.button:active {
 	position:relative;
 	top:1px;
 }

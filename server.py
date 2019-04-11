@@ -60,7 +60,7 @@ def editing_answers(answer_id):
     question_id = answer["question_id"]
     if request.method=='POST':
         data_manager.edit_existing_answer_data(request.form['message'], answer_id)
-        return render_template('/list.html', question_id=question_id)
+        return render_template('/question/<question_id>.html', question_id=question_id)
     return render_template("edit-answer.html",answer=answer,answer_id=answer_id)
 
 
