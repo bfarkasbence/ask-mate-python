@@ -58,14 +58,18 @@ def delete_question(question_id):
     return render_template("delete-question.html", question_id=question_id)
 
 
-@app.route("/answer/<answer_id>/edit", methods=['GET', 'POST'])
+@app.route("/answer/<answer_id>/edit", methods=['GET'])
 def editing_answers(answer_id):
     answer = data_manager.get_answer_message_and_question_id(answer_id)
+    return render_template("edit-answer.html", answer=answer, answer_id=answer_id)
+
+
+@app.route("/answer/<answer_id>/edit", methods=['POST'])
+def save_edited_answers(answer_id):
+    answer = data_manager.get_answer_message_and_question_id(answer_id)
     question_id = answer["question_id"]
-    if request.method=='POST':
-        data_manager.edit_existing_answer_data(request.form['message'], answer_id)
-        return render_template('/question/<question_id>.html', question_id=question_id)
-    return render_template("edit-answer.html",answer=answer,answer_id=answer_id)
+    data_manager.edit_existing_answer_data(request.form['message'], answer_id)
+    return redirect(url_for("route_question", question_id=question_id))
 
 
 @app.route("/search")

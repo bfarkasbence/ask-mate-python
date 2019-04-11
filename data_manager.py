@@ -84,7 +84,7 @@ def edit_existing_answer_data(cursor,new_message,answer_id):
                         UPDATE answer set message = %(new_message)s
                         WHERE id = %(answer_id)s;
                         """,
-                   {"new_message": new_message,"answer_id":answer_id })
+                   {"new_message": new_message, "answer_id": answer_id})
 
 
 @connection.connection_handler
