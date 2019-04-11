@@ -5,14 +5,16 @@ app = Flask(__name__)
 
 
 @app.route("/list")
-def route_list_of_questions():
-    questions = data_manager.get_questions()
+def route_sorted_list_of_questions():
+    criteria = request.args.get('criteria', 'submission_time')
+    direction = request.args.get('direction', 'DESC')
+    questions = data_manager.get_questions(criteria, direction, None)
     return render_template("list.html", list_of_questions=questions)
 
 
 @app.route('/')
 def route_list_of_latest_questions():
-    questions = data_manager.get_questions(5)
+    questions = data_manager.get_questions('submission_time', 'DESC', 5)
     return render_template("home.html", list_of_questions=questions)
 
 
@@ -61,7 +63,6 @@ def editing_answers(answer_id):
         return redirect('/list')
     answer = data_manager.get_answer_message(answer_id)
     return render_template("edit-answer.html",answer=answer,answer_id=answer_id)
-
 
 
 if __name__ == "__main__":
