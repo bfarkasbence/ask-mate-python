@@ -26,10 +26,10 @@
             </td>
             {% endfor %}
         <td>
-            <a href="/questions/{{ item.id }}/like"><button type="button" class="button">Like.</button></a>
+            <a href="/questions/{{ item.id }}/like"><button type="button" class="button">👍</button></a>
         </td>
         <td>
-            <a href="/questions/{{ item.id }}/dislike"><button type="button" class="button">Dislike.</button></a>
+            <a href="/questions/{{ item.id }}/dislike"><button type="button" class="button">👎</button></a>
         </td>
         {% endfor %}
     </tr>
@@ -58,10 +58,10 @@
             <a href="/answer/{{ item.question_id }}/{{ item.id }}/delete"><button type="button" class="button">Delete answer!</button></a>
          </td>
         <td class= "topborder">
-            <a href="/answer/{{ item.question_id }}/{{ item.id }}/like"><button type="button" class="button">Like.</button></a>
+            <a href="/answer/{{ item.question_id }}/{{ item.id }}/like"><button type="button" class="button">👍</button></a>
         </td>
         <td class="topborder">
-            <a href="/answer/{{ item.question_id }}/{{ item.id }}/dislike"><button type="button" class="button">Dislike.</button></a>
+            <a href="/answer/{{ item.question_id }}/{{ item.id }}/dislike"><button type="button" class="button">👎</button></a>
         </td>
     </tr>
     {% endfor %}

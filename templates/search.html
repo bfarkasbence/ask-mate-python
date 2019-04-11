@@ -8,16 +8,18 @@
 </head>
 <body>
     <h1>Search Results:</h1>
-    <ol>
+    <table>
         {% for search in searching %}
-            <a href="questions/{{ search.id }}"</a>
-        <li>
-            {{ search.title }}
+        <tr>
+        <td>
+            <a href="questions/{{ search.id }}">
+            {{ search.title }}</a>
 
-        </li>
+        </td>
+        </tr>
     {% endfor %}
-</ol>
+</table>
 <a href="/list">
-    <button type="button" class="myButton">Back to questions</button>
+    <button type="button" class="button">Back to questions</button>
 </body>
 </html>
