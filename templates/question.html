@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Display a question</title>
+    <link rel="stylesheet" type="text/css" href="static/design.css">
 </head>
 <body>
 <h1>Questions:</h1>
@@ -52,13 +53,13 @@
 </table>
 <br>
 <a href="/questions/{{ question_id }}/new-answer">
-    <button type="button">Add answer!</button>
+    <button type="button" class="myButton">Add answer!</button>
 </a><br>
 <a href="/list">
-    <button type="button">Back to questions.</button>
+    <button type="button" class="myButton">Back to questions.</button>
 </a>
 <a href="/questions/{{ question_id }}/delete">
-    <button type="button">Delete questions.</button>
+    <button type="button" class="myButton">Delete questions.</button>
 </a>
 </body>
 </html>

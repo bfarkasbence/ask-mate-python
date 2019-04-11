@@ -23,9 +23,9 @@ def get_questions(cursor, number_of_questions=None):
     return questions
 
 @connection.connection_handler
-def get_answer_message(cursor,answer_id):
+def get_answer_message_and_question_id(cursor,answer_id):
     cursor.execute("""
-                    SELECT message FROM answer
+                    SELECT message,question_id FROM answer
                     WHERE id = %(answer_id)s;
                    """, {'answer_id': int(answer_id)})
     return cursor.fetchone()
