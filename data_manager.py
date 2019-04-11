@@ -104,7 +104,14 @@ def delete_answer_by_question_id(cursor, question_id):
                     DELETE FROM answer
                     WHERE question_id = %(question_id)s;
                     """, {"question_id": question_id})
-    return
+
+
+@connection.connection_handler
+def delete_answer_by_id(cursor, answer_id):
+    cursor.execute("""
+                    DELETE FROM answer
+                    WHERE id = %(answer_id)s;
+                    """, {"answer_id": answer_id})
 
 
 @connection.connection_handler
@@ -113,7 +120,6 @@ def delete_question_by_quesion_id(cursor, question_id):
                     DELETE FROM question
                     WHERE id = %(question_id)s;
                     """, {"question_id": question_id})
-    return
 
 
 
