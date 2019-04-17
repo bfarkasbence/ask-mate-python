@@ -8,7 +8,7 @@
 </head>
 <body>
 <h1>Question:</h1>
-<table border="1">
+<table>
     <tr align="center">
         <th>ID</th>
         <th>Submission time</th>
@@ -26,6 +26,9 @@
             </td>
             {% endfor %}
         <td>
+        <a href="/question/{{ item.id }}/new-comment"><button type="button" class="button"> Add new comment!</button></a>
+        </td>
+        <td>
             <a href="/questions/{{ item.id }}/like"><button type="button" class="button">👍</button></a>
         </td>
         <td>
@@ -35,15 +38,15 @@
     </tr>
 </table>
 <h2>Answers:</h2>
-<table id="table1">
-    <tr>
+<table>
+    <th>
         <th>ID</th>
         <th>Submission time</th>
         <th>Vote number</th>
         <th>Question ID</th>
         <th>Message</th>
         <th>Image</th>
-    </tr>
+    </th>
     {% for item in answers_data %}
     <tr>
         {% for data in item.values() %}
@@ -52,11 +55,16 @@
         </td>
         {% endfor %}
         <td class="topborder">
+        </td>
+        <td class="topborder">
             <a href="/answer/{{ item.id }}/edit"><button type="button" class="button">Edit answer!</button></a>
         </td>
         <td class="topborder">
             <a href="/answer/{{ item.question_id }}/{{ item.id }}/delete"><button type="button" class="button">Delete answer!</button></a>
-         </td>
+        </td>
+        <td class="topborder">
+            <a href="/question/{{ item.id }}/new-comment"><button type="button" class="button"> Add new comment!</button></a>
+        </td>
         <td class= "topborder">
             <a href="/answer/{{ item.question_id }}/{{ item.id }}/like"><button type="button" class="button">👍</button></a>
         </td>

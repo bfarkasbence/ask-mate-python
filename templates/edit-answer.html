@@ -16,14 +16,14 @@
     </tr>
     <tr>
         <td>Image:</td>
-        <td><input type="file" name="image"></td>
+        <td><input type="file" name="image" class="button"></td>
     </tr>
     <tr>
-        <td><button type="submit">Send!</button></td>
+        <td><button type="submit" class="button">Send!</button><br>
+        <a href="/questions/{{answer.question_id}}"> <button type="button" class="button">Back to questions.</button></a></td>
     </tr>
     </form>
     </table><br>
-    <a href="/questions/{{answer.question_id}}.html"> <button type="button">Back to questions.</button></a>
 
 </body>
 </html>

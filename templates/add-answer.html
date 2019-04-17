@@ -8,18 +8,18 @@
 </head>
 <body>
 <h1>Add answer:</h1>
-    <table>
+    <table id="input">
     <form action="" method="post">
-    <tr>
+    <tr id="input">
         <td>Message:</td>
         <td><textarea name="message" rows="10" cols="30" min="10" max="500" placeholder="Maximum 500 character."></textarea></td>
     </tr>
-    <tr>
+    <tr id="input">
         <td>Image:</td>
-        <td><input type="file" name="image" class="button"></td>
+        <td><input type="file" name="image" class="button   "></td>
     </tr>
-    <tr>
-        <td><button type="submit" class="button">Send!</button>
+    <tr id="input">
+        <td><button type="submit" class="button">Send!</button><br>
         <a href="/questions/{{question_id}}"> <button type="button" class="button">Back to questions.</button></a></td>
     </tr>
     </form>

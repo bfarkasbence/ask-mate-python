@@ -3,20 +3,33 @@ body {
     font-size: 14px;
     color: black;
     background-image: url("background.png");
-    margin: 20px;
+    margin: 10px;
     padding: 0;
 }
 
 table{
 	border: transparent;
-	width:70%;
-    margin-left:15%;
-    margin-right:15%;;
+    font-family: 'Consolas', 'Deja Vu Sans Mono', 'Bitstream Vera Sans Mono', monospace;
+    font-size: 15px;
+	width: auto;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+table#input{
+    font-family: 'Consolas', 'Deja Vu Sans Mono', 'Bitstream Vera Sans Mono', monospace;
+    font-size: 15px;
+    text-align: left;
 }
 
 th{
 	border: transparent;
 	text-align: center;
+}
+
+tr#input{
+    border:transparent;
+	padding: 1px;
 }
 
 td{
@@ -26,11 +39,6 @@ td{
 
 .align-center{
 	text-align: center;
-}
-
-table#table1 {
-    width: auto;
-	height: auto;
 }
 
 .delete-div{
