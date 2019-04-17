@@ -22,8 +22,9 @@ def route_list_of_latest_questions():
 def route_question(question_id):
     question_data = data_manager.get_question_data_by_id(question_id)
     answers_data = data_manager.get_list_of_answers(question_id)
+    comment_data = data_manager.get_comment_data(question_id)
     return render_template("question.html", question_data=question_data, answers_data=answers_data,
-                           question_id=question_id)
+                           question_id=question_id, comment_data=comment_data)
 
 
 @app.route("/add-question", methods=['GET'])
