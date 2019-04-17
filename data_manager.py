@@ -93,7 +93,9 @@ def searching_data(cursor,phrase):
     cursor.execute("""
                         SELECT DISTINCT question.* FROM answer
                         FULL JOIN question ON  answer.question_id = question.id
-                        WHERE answer.message ILIKE %(phrase)s OR  question.title ILIKE %(phrase)s OR question.message ILIKE %(phrase)s;
+                        WHERE answer.message ILIKE %(phrase)s 
+                            OR question.title ILIKE %(phrase)s
+                            OR question.message ILIKE %(phrase)s;
                         """,
                    {"phrase": phrase})
     return cursor.fetchall()
@@ -169,12 +171,54 @@ def complement_new_comment_of_question(cursor, message, question_id):
 
 
 @connection.connection_handler
+def complement_new_comment_of_answer(cursor, message, answer_id):
+    submission_time = get_submission_time()
+    cursor.execute("""
+                    INSERT INTO comment ("question_id", "answer_id" , "message" ,"submission_time", "edited_count")
+                    VALUES (%(none)s,%(answer_id)s, %(message)s, %(submission_time)s, %(none)s); """,
+                   {"answer_id": answer_id, "submission_time": submission_time, "message": message, "none": None})
+
+
+@connection.connection_handler
 def get_comment_data(cursor, question_id):
     cursor.execute("""
-                    SELECT comment.question_id, comment.answer_id, comment.message, comment.submission_time, comment.edited_count FROM comment
+                    SELECT comment.question_id, comment.answer_id, comment.message, comment.submission_time,
+                    comment.edited_count FROM comment
                     FULL JOIN answer
                     ON comment.answer_id = answer.id
                     WHERE comment.question_id = %(question_id)s OR answer.question_id = %(question_id)s; """,
                    {"question_id": question_id})
     comments = cursor.fetchall()
     return comments
+
+
+@connection.connection_handler
+def delete_comment_by_quesion_id(cursor, question_id):
+    cursor.execute("""
+                    DELETE FROM comment
+                    WHERE question_id = %(question_id)s;
+                    """, {"question_id": question_id})
+
+
+@connection.connection_handler
+def delete_answers_comments_by_question_id(cursor, question_id):
+    cursor.execute("""
+                    DELETE FROM comment
+                    WHERE answer_id IN (SELECT id FROM answer WHERE answer.question_id = %(question_id)s);
+                    """, {"question_id": question_id})
+
+
+@connection.connection_handler
+def delete_comment_by_answer_id(cursor, answer_id):
+    cursor.execute("""
+                    DELETE FROM comment
+                    WHERE answer_id = %(answer_id)s; 
+                    """, {"answer_id": answer_id})
+
+
+@connection.connection_handler
+def delete_comment_by_comment_id(cursor, comment_id):
+    cursor.execute("""
+                    DELETE FROM comment
+                    WHERE id = %(comment_id)s;
+                    """, {"comment_id": comment_id})

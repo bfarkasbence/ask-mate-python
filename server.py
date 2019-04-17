@@ -53,7 +53,9 @@ def route_add_answer(question_id):
 def delete_question(question_id):
     delete_question_confirm = request.args.get('confirm', False)
     if delete_question_confirm == "True":
+        data_manager.delete_answers_comments_by_question_id(question_id)
         data_manager.delete_answer_by_question_id(question_id)
+        data_manager.delete_comment_by_quesion_id(question_id)
         data_manager.delete_question_by_quesion_id(question_id)
         return redirect('/list')
     return render_template("delete-question.html", question_id=question_id)
@@ -63,6 +65,7 @@ def delete_question(question_id):
 def delete_answer(question_id, answer_id):
     delete_answer_confirm = request.args.get('confirm', False)
     if delete_answer_confirm == "True":
+        data_manager.delete_comment_by_answer_id(answer_id)
         data_manager.delete_answer_by_id(answer_id)
         return redirect(url_for("route_question", question_id=question_id))
     return render_template("delete-answer.html", question_id=question_id, answer_id=answer_id)
@@ -120,14 +123,34 @@ def raise_view_number(question_id):
 
 
 @app.route("/question/<question_id>/new-comment", methods=['GET'])
-def new_comment(question_id):
+def new_questions_comment(question_id):
     return render_template("add-comment.html", question_id=question_id)
 
 
 @app.route("/question/<question_id>/new-comment", methods=['POST'])
-def comment(question_id):
+def questions_comment(question_id):
     data_manager.complement_new_comment_of_question(request.form['message'], question_id)
     return redirect(url_for("route_question", question_id=question_id))
+
+
+@app.route("/answer/<question_id>/<answer_id>/new-comment", methods=['GET'])
+def new_answers_comment(question_id, answer_id):
+    return render_template("add-comment.html", question_id=question_id)
+
+
+@app.route("/answer/<question_id>/<answer_id>/new-comment", methods=['POST'])
+def answers_comment(question_id, answer_id):
+    data_manager.complement_new_comment_of_answer(request.form['message'], answer_id)
+    return redirect(url_for("route_question", question_id=question_id))
+
+
+@app.route("/comment/<question_id>/<comment_id>/delete")
+def delete_comment_by_id(comment_id, question_id):
+    delete_comment_confirm = request.args.get('confirm', False)
+    if delete_comment_confirm == "True":
+        data_manager.delete_comment_by_comment_id(comment_id)
+        return redirect(url_for("route_question", question_id=question_id))
+    return render_template("delete-comment.html", question_id=question_id, comment_id=comment_id)
 
 
 if __name__ == "__main__":

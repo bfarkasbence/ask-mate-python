@@ -41,6 +41,7 @@
         <tr>
             <td>{{ item.submission_time }}</td>
             <td> {{ item.message }}</td>
+            <td>delete_gomb_kell ide mutasson /comment/<question_id>/<comment_id>/delete</td>
         </tr>
         {% endif %}
     {% endfor %}
@@ -71,7 +72,7 @@
             <a href="/answer/{{ item.question_id }}/{{ item.id }}/delete"><button type="button" class="button">Delete answer!</button></a>
         </td>
         <td class="topborder">
-            <a href="/answer/{{ item.id }}/new-comment"><button type="button" class="button"> Add new comment!</button></a>
+            <a href="/answer/{{item.question_id }}/{{ item.id }}/new-comment"><button type="button" class="button"> Add new comment!</button></a>
         </td>
         <td class= "topborder">
             <a href="/answer/{{ item.question_id }}/{{ item.id }}/like"><button type="button" class="button">👍</button></a>
@@ -85,6 +86,7 @@
         <tr>
             <td>{{ comments.submission_time }}</td>
             <td>{{ comments.message }}</td>
+            <td>delete_gomb_kell ide mutasson /comment/<question_id>/<comment_id>/delete</td>
         </tr>
 
         {% endif %}
