@@ -166,3 +166,15 @@ def complement_new_comment_of_question(cursor, message, question_id):
                     INSERT INTO comment ("question_id", "answer_id" , "message" ,"submission_time", "edited_count")
                     VALUES (%(question_id)s, None, %(message)s, %(submission_time)s, None); """,
                    {"question_id": question_id,  "submission_time": submission_time,"message": message })
+                    VALUES (%(question_id)s, %(none)s, %(message)s, %(submission_time)s, %(none)s); """,
+                   {"question_id": question_id, "submission_time": submission_time, "message": message, "none": None})
+
+
+@connection.connection_handler
+def get_comment_data(cursor, question_id):
+    cursor.execute("""
+                    SELECT comment.question_id, comment.answer_id, comment.message, comment.submission_time, comment.edited_count FROM comment
+                    FULL JOIN answer
+                    ON comment.answer_id = answer.id
+                    WHERE comment.question_id = %(question_id)s OR answer.question_id = %(question_id)s; """,
+                   {"question_id": question_id})
