@@ -36,6 +36,14 @@
         </td>
         {% endfor %}
     </tr>
+    {% for item in comment_data %}
+        {% if item.answer_id == None %}
+        <tr>
+            <td>{{ item.submission_time }}</td>
+            <td> {{ item.message }}</td>
+        </tr>
+        {% endif %}
+    {% endfor %}
 </table>
 <h2>Answers:</h2>
 <table>
@@ -72,6 +80,15 @@
             <a href="/answer/{{ item.question_id }}/{{ item.id }}/dislike"><button type="button" class="button">👎</button></a>
         </td>
     </tr>
+    {% for comments in comment_data %}
+        {% if item.id == comments.answer_id %}
+        <tr>
+            <td>{{ comments.submission_time }}</td>
+            <td>{{ comments.message }}</td>
+        </tr>
+
+        {% endif %}
+    {% endfor %}
     {% endfor %}
 </table>
 <div class="align-center">

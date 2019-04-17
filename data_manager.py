@@ -178,3 +178,5 @@ def get_comment_data(cursor, question_id):
                     ON comment.answer_id = answer.id
                     WHERE comment.question_id = %(question_id)s OR answer.question_id = %(question_id)s; """,
                    {"question_id": question_id})
+    comments = cursor.fetchall()
+    return comments
