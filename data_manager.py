@@ -159,3 +159,10 @@ def raise_view_number(cursor, question_id):
                     """, {"question_id": question_id})
 
 
+@connection.connection_handler
+def complement_new_comment_of_question(cursor, message, question_id):
+    submission_time = get_submission_time()
+    cursor.execute("""
+                    INSERT INTO comment ("question_id", "answer_id" , "message" ,"submission_time", "edited_count")
+                    VALUES (%(question_id)s, None, %(message)s, (%(submission_time)s, None); """,
+                   {"question_id": question_id,  "submission_time": submission_time,"message": message })

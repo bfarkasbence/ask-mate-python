@@ -5,11 +5,15 @@
     <title>Title</title>
     <link rel="shortcut icon" href="/static/logo.ico" />
     <link rel="stylesheet" type="text/css" href="/static/design.css"/>
+    <title>Search</title>
 </head>
 <body>
     <h1>Search Results:</h1>
     <table>
         {% for search in searching %}
+            <a href="questions/{{ search.id }}?search_box={{ search_box }}"</a>
+        <li>
+            {{ search.title }}
         <tr>
         <td>
 

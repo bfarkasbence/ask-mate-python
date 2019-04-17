@@ -118,5 +118,18 @@ def raise_view_number(question_id):
     return redirect(url_for("route_question", question_id=question_id))
 
 
+@app.route("/question/<question_id>/new-comment", methods=['GET'])
+def new_comment(question_id):
+    return render_template("add-comment.html", question_id=question_id)
+
+
+@app.route("/question/<question_id>/new-comment", methods=['POST'])
+def comment(question_id):
+    data_manager.complement_new_comment_of_question(request.form['message'], question_id)
+    return redirect(url_for("route_question", question_id=question_id))
+
+
+
+
 if __name__ == "__main__":
     app.run(debug=True, port=5000)
