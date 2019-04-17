@@ -12,8 +12,8 @@
         {% for search in searching %}
         <tr>
         <td>
-            <a href="questions/{{ search.id }}">
-            {{ search.title }}</a>
+
+            <a href="{{ url_for('raise_view_number', question_id=search.id) }}">{{ search.title }}"</a>
 
         </td>
         </tr>
