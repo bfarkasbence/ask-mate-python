@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add new answer</title>
+    <link rel="stylesheet" type="text/css" href="/static/design.css">
+    <link rel="shortcut icon" href="/static/logo.ico" />
+</head>
+<body>
+<h1>Add answer:</h1>
+    <table>
+    <form action="" method="post">
+    <tr>
+        <td>Message:</td>
+        <td><textarea name="message" rows="10" cols="30" min="10" max="500" placeholder="Maximum 500 character."></textarea></td>
+    </tr>
+    <tr>
+        <td><button type="submit" class="button">Send!</button>
+        <a href="/questions/{{question_id}}"> <button type="button" class="button">Back to questions.</button></a></td>
+    </tr>
+    </form>
+    </table>
+</body>
+</html>
