@@ -153,5 +153,17 @@ def delete_comment_by_id(comment_id, question_id):
     return render_template("delete-comment.html", question_id=question_id, comment_id=comment_id)
 
 
+@app.route("/comment/<question_id>/<comment_id>/edit", methods=['GET'])
+def editing_comments(comment_id, question_id):
+    comment = data_manager.get_comment_message_and_question_id(comment_id)
+    return render_template("edit-comment.html", comment=comment, comment_id=comment_id, question_id=question_id)
+
+
+@app.route("/comment/<question_id>/<comment_id>/edit", methods=['POST'])
+def save_edited_comments(comment_id, question_id):
+    data_manager.edit_existing_comment_data(request.form['message'], comment_id)
+    return redirect(url_for("route_question", question_id=question_id))
+
+
 if __name__ == "__main__":
     app.run(debug=True, port=5000)

@@ -224,3 +224,22 @@ def delete_comment_by_comment_id(cursor, comment_id):
                     DELETE FROM comment
                     WHERE id = %(comment_id)s;
                     """, {"comment_id": comment_id})
+
+
+@connection.connection_handler
+def edit_existing_comment_data(cursor, new_message, comment_id):
+    submission_time = get_submission_time()
+    cursor.execute("""
+                        UPDATE comment set message = %(new_message)s, submission_time = %(submission_time)s, edited_count = edited_count + 1
+                        WHERE id = %(comment_id)s;
+                        """,
+                   {"new_message": new_message, "comment_id": comment_id, "submission_time": submission_time})
+
+
+@connection.connection_handler
+def get_comment_message_and_question_id(cursor, comment_id):
+    cursor.execute("""
+                    SELECT message, question_id FROM comment
+                    WHERE id = %(comment_id)s;
+                   """, {'comment_id': int(comment_id)})
+    return cursor.fetchone()

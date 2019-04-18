@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Editing answer</title>
+    <link rel="stylesheet" type="text/css" href="/static/design.css"/>
+    <link rel="shortcut icon" href="/static/logo.ico" />
+</head>
+<body>
+<h1>Edit comment:</h1>
+    <table>
+    <form action="/comment/{{question_id}}/{{ comment_id }}/edit" method="post">
+    <tr>
+        <td>Message:</td>
+        <td><textarea name="message" rows="10" cols="30" min="10" max="500">{{ comment.message }}</textarea></td>
+    </tr>
+    <tr>
+        <td><button type="submit" class="button">Send!</button><br>
+        <a href="/questions/{{comment.question_id}}"> <button type="button" class="button">Back to questions.</button></a></td>
+    </tr>
+    </form>
+    </table><br>
+
+</body>
+</html>
