@@ -231,7 +231,7 @@ def edit_existing_comment_data(cursor, new_message, comment_id):
                         UPDATE comment set message = %(new_message)s, submission_time = %(submission_time)s, edited_count = edited_count + 1
                         WHERE id = %(comment_id)s;
                         """,
-                   {"new_message": new_message, "comment_id": comment_id, "submission_time": submission_time})
+                   {"new_message": new_message, "comment_id": comment_id, "submission_time": submission_time })
 
 
 @connection.connection_handler
