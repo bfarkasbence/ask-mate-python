@@ -177,7 +177,7 @@ def register():
         return render_template('register.html')
     else:
         hashed_password = hash_password(request.form['password'])
-        data_manager.register_new_user(request.form['username'], hashed_password)
+        data_manager.register_new_user(request.form['username'], hashed_password, request.form['email'])
         return redirect(url_for('route_list_of_latest_questions'))
 
 
