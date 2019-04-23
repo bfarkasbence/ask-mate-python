@@ -1,8 +1,9 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, flash
 import data_manager
 import bcrypt
 
 app = Flask(__name__)
+app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
 
 @app.route("/list")
@@ -177,8 +178,16 @@ def register():
         return render_template('register.html')
     else:
         hashed_password = hash_password(request.form['password'])
-        data_manager.register_new_user(request.form['username'], hashed_password, request.form['email'])
-        return redirect(url_for('route_list_of_latest_questions'))
+        if check_username_or_mail_in_db(request.form['username'], request.form['password']):
+            data_manager.register_new_user(request.form['username'], hashed_password, request.form['email'])
+            return redirect(url_for('route_list_of_latest_questions'))
+        else:
+            flash("Username or email already in use...")
+            return redirect(url_for('register',))
+
+
+def check_username_or_mail_in_db(username, password):
+    return len(data_manager.check_username_or_email(username, password)) == 0
 
 
 if __name__ == "__main__":

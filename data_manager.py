@@ -250,3 +250,12 @@ def register_new_user(cursor, username, hashed_password, email):
                     INSERT INTO users (username, password, email, registration_time)
                     VALUES (%(username)s, %(hashed_password)s, %(email)s, %(registration_time)s)
                     """, {'username': username, 'hashed_password': hashed_password, 'email': email, 'registration_time':registration_time})
+
+
+@connection.connection_handler
+def check_username_or_email(cursor,username,email):
+    cursor.execute("""
+                    SELECT * FROM users 
+                    WHERE username = %(username)s OR email = %(email)s
+                    """,{'username':username, 'email':email})
+    return cursor.fetchall()

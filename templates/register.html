@@ -5,12 +5,17 @@
     <title>Register</title>
 </head>
 <body>
+
+{% if get_flashed_messages() %}
+    <h2 class="error-message">{{ get_flashed_messages()[0] }}</h2>
+{% endif %}
 <form method="POST" action="/registration">
-    <input name="username" type="text" placeholder="User name"><br>
-    <input name="password" type="password" ><br>
-    <input name="email" type="email" placeholder="email"><br>
+    <input name="username" type="text" placeholder="User name" required ><br>
+    <input name="password" type="password" required minlength="8"><br>
+    <input name="email" type="email" placeholder="email" required><br>
     <button type="submit">Submit</button>
 
 </form>
+
 </body>
 </html>
