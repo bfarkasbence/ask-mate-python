@@ -36,8 +36,10 @@
         </td>
         {% endfor %}
     </tr>
+    {% if comment_data != None %}
     {% for item in comment_data %}
         {% if item.question_id != None %}
+
         <tr>
             <td>{{ item.submission_time }}</td>
             <td> {{ item.message }}</td>
@@ -45,6 +47,7 @@
         </tr>
         {% endif %}
     {% endfor %}
+    {% endif %}
 </table>
 <h2>Answers:</h2>
 <table>

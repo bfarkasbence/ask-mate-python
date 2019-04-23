@@ -166,8 +166,6 @@ def complement_new_comment_of_question(cursor, message, question_id):
     submission_time = get_submission_time()
     cursor.execute("""
                     INSERT INTO comment ("question_id", "answer_id" , "message" ,"submission_time", "edited_count")
-                    VALUES (%(question_id)s, None, %(message)s, %(submission_time)s, None); """,
-                   {"question_id": question_id,  "submission_time": submission_time,"message": message })
                     VALUES (%(question_id)s, %(none)s, %(message)s, %(submission_time)s, %(none)s); """,
                    {"question_id": question_id, "submission_time": submission_time, "message": message, "none": None})
 
@@ -233,7 +231,7 @@ def edit_existing_comment_data(cursor, new_message, comment_id):
                         UPDATE comment set message = %(new_message)s, submission_time = %(submission_time)s, edited_count = edited_count + 1
                         WHERE id = %(comment_id)s;
                         """,
-                   {"new_message": new_message, "comment_id": comment_id, "submission_time": submission_time})
+                   {"new_message": new_message, "comment_id": comment_id, "submission_time": submission_time })
 
 
 @connection.connection_handler
