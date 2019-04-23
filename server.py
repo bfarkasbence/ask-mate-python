@@ -165,5 +165,11 @@ def save_edited_comments(comment_id, question_id):
     return redirect(url_for("route_question", question_id=question_id))
 
 
+@app.route("/user-list")
+def route_users_list():
+    users = data_manager.get_users()
+    return render_template("users-list.html", users=users)
+
+
 if __name__ == "__main__":
     app.run(debug=True, port=5000)
