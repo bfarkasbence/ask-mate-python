@@ -241,3 +241,12 @@ def get_comment_message_and_question_id(cursor, comment_id):
                     WHERE id = %(comment_id)s;
                    """, {'comment_id': int(comment_id)})
     return cursor.fetchone()
+
+
+@connection.connection_handler
+def register_new_user(cursor, username, hashed_password):
+    registration_time = get_submission_time()
+    cursor.execute("""
+                    INSERT INTO users (user_name, password, registration_time)
+                    VALUES (%s, %s, %s)
+                    """, (username, hashed_password, registration_time))
