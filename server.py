@@ -181,5 +181,11 @@ def register():
         return redirect(url_for('route_list_of_latest_questions'))
 
 
+@app.route("/user-list")
+def route_users_list():
+    users = data_manager.get_users()
+    return render_template("users-list.html", users=users)
+
+
 if __name__ == "__main__":
     app.run(debug=True, port=5000)

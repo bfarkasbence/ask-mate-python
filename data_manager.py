@@ -166,8 +166,8 @@ def complement_new_comment_of_question(cursor, message, question_id):
     submission_time = get_submission_time()
     cursor.execute("""
                     INSERT INTO comment ("question_id", "answer_id" , "message" ,"submission_time", "edited_count")
-                    VALUES (%(question_id)s, None, %(message)s, %(submission_time)s, None); """,
-                   {"question_id": question_id,  "submission_time": submission_time,"message": message })
+                    VALUES (%(question_id)s, %(none)s, %(message)s, %(submission_time)s, %(none)s); """,
+                   {"question_id": question_id,  "submission_time": submission_time, "message": message, "none": None })
 
 
 @connection.connection_handler
@@ -250,3 +250,11 @@ def register_new_user(cursor, username, hashed_password, email):
                     INSERT INTO users (username, password, email, registration_time)
                     VALUES (%(username)s, %(hashed_password)s, %(email)s, %(registration_time)s)
                     """, {'username': username, 'hashed_password': hashed_password, 'email': email, 'registration_time':registration_time})
+
+
+@connection.connection_handler
+def get_users(cursor):
+    cursor.execute("""
+                    SELECT username FROM users
+                    """)
+    return cursor.fetchall()

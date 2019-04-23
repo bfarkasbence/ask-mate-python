@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User <list></list></title>
+    <link rel="shortcut icon" href="/static/logo.ico" />
+    <link rel="stylesheet" type="text/css" href="static/design.css">
+</head>
+<body>
+<h1>Users</h1>
+<table>
+    {% for user in users %}
+        <tr id="margin">
+        <td>
+                        <a href="">{{ user.username }}</a><br>
+        </td>
+        </tr>
+    {% endfor %}
+</table>
+<div class="align-center">
+<a href="/">
+    <button type="button" class="button">Go to homepage!</button>
+</a>
+</div>
+</body>
+</html>
