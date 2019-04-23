@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for
 import data_manager
+import bcrypt
 
 app = Flask(__name__)
 
@@ -163,6 +164,21 @@ def editing_comments(comment_id, question_id):
 def save_edited_comments(comment_id, question_id):
     data_manager.edit_existing_comment_data(request.form['message'], comment_id)
     return redirect(url_for("route_question", question_id=question_id))
+
+
+def hash_password(plain_text_password):
+    hashed_bytes = bcrypt.hashpw(plain_text_password.encode('utf-8'), bcrypt.gensalt())
+    return hashed_bytes.decode('utf-8')
+
+
+@app.route("/registration", methods=['POST', 'GET'])
+def register():
+    if request.method == 'GET':
+        return render_template('register.html')
+    else:
+        hashed_password = hash_password(request.form['password'])
+        data_manager.register_new_user(request.form['username'], hashed_password, request.form['email'])
+        return redirect(url_for('route_list_of_latest_questions'))
 
 
 if __name__ == "__main__":
