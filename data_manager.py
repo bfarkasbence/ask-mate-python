@@ -71,12 +71,12 @@ def complement_new_question_data(cursor, title, message, image):
 
 
 @connection.connection_handler
-def complement_new_answer_data(cursor, message, image, question_id):
+def complement_new_answer_data(cursor, message, image, question_id, user_id):
     submission_time = get_submission_time()
     cursor.execute("""
-                    INSERT INTO answer ("submission_time", "vote_number", "question_id", "message", "image")
+                    INSERT INTO answer ("submission_time", "vote_number", "question_id", "message", "image","user_id")
                     VALUES  (%(submission_time)s, 0, %(question_id)s, %(message)s, %(image)s); """,
-                   {"submission_time": submission_time, "question_id": question_id, "message": message, "image": image})
+                   {"submission_time": submission_time, "question_id": question_id, "message": message, "image": image, "user_id":user_id})
 
 
 @connection.connection_handler
