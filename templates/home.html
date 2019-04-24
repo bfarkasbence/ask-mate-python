@@ -7,23 +7,24 @@
     <link rel="shortcut icon" href="/static/logo.ico" />
 </head>
 <body>
-<h1>Ask mate 2.0</h1>
-<div class="searchbox">
+<h1><table><tr><td width=20% ><div align="center">
     <form action="/search" method="get" >
-    <input type="text" name="search_box" placeholder="What are you looking for?">
+    <input type="text" name="search_box" placeholder="What are you looking for?"><br>
     <button type="submit" class="button">Search</button></a>
     </form>
-</div>
-{% if session.username %}
- You are logged in as {{ session.username }}
+</div></td>
+<td width=60% style="font-size: 35px">Ask mate 3.0</td>
+<td width=20% style="font-size: 13px">{% if session.username %}
+ You are logged in as <i>{{ session.username }}</i>
 <a href="/logout">
-    <button type="button" class="button">Log out.</button>
+    <button type="button" class="button">Log out.</button></a>
 {% else %}
 <a href="/login">
     <button type="button" class="button">Log in.</button>
 </a>
-{% endif %}
-</a>
+{% endif %}</td></tr></div>
+</table>
+</h1>
 <table>
 <tr>
     <td>

@@ -11,45 +11,30 @@
     {% if session['logged_in'] %}
 
 
-    You're logged in already,fool!
+    <h2>You're logged in already,fool!</h2>
 
     {% else %}
 
 <form action="/login" method="POST">
-    <div class="login">
-    <div class="login-screen">
-    <div class="app-title">
-    <div class="align-center">
-
-
-</div>
         <h1>Log in</h1>
 <br>
 {% if get_flashed_messages() %}
     <label><h2 class="error-message">{{ get_flashed_messages()[0] }}</h2></label>
 {% endif %}
 <br>
-
-
-<div class="login-form">
-
     <table>
         <tr>
             <td>Username:</td>
             <td>
-                <div class="control-group">
                     <input type="text" class="login-field" value="" placeholder="Username" name="username">
                     <label class="login-field-icon fui-user" for="login-name"></label>
-                </div>
             </td>
         </tr>
         <tr>
             <td>Password:</td>
             <td>
-                <div class="control-group">
                     <input type="password" class="login-field" value="" placeholder="Password" name="password">
                     <label class="login-field-icon fui-lock" for="login-pass"></label>
-                </div>
             </td>
         </tr>
         <tr>
@@ -69,10 +54,6 @@
             </td>
         </tr>
 </table>
-</div>
-</div>
-</div>
-</div>
 </form>
     {% endif %}
 {% endblock %}
