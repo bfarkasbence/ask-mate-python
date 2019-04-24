@@ -216,10 +216,10 @@ def get_login():
             session['user_id'] = user_data.get('id')
             return redirect('/list')
         else:
-            flash("Wrong password!")
+            flash("Wrong password or username!")
             return redirect('/login')
     except AttributeError:
-        flash("Wrong username")
+        flash("Wrong password or username!")
         return redirect('/login')
 
 
