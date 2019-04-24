@@ -17,6 +17,7 @@ def route_sorted_list_of_questions():
 @app.route('/')
 def route_list_of_latest_questions():
     questions = data_manager.get_questions('submission_time', 'DESC', 5)
+    print(session.get('logged_in'))
     if not session.get('logged_in'):
         return render_template('login.html')
     return render_template("home.html", list_of_questions=questions)
@@ -211,10 +212,10 @@ def login():
 
 @app.route('/login', methods=["POST"])
 def get_login():
-
-    if request.form["password"] == data_manager.user_login(request.form["username"]):
+    if verify_password(request.form["password"], data_manager.user_login(request.form["username"]).get('password')):
         session["username"] = request.form["username"]
         session['logged_in'] = True
+        print(session)
     return redirect('/list')
 
 
