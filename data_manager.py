@@ -62,21 +62,21 @@ def get_list_of_answers(cursor, question_id):
 
 
 @connection.connection_handler
-def complement_new_question_data(cursor, title, message, image):
+def complement_new_question_data(cursor, title, message, image, user_id):
     submission_time = get_submission_time()
     cursor.execute("""
-                    INSERT INTO question ("submission_time", "vote_number", "view_number", "title", "message", "image")
-                    VALUES (%(submission_time)s, 0, 0, %(title)s, %(message)s, %(image)s); """,
-                   {"submission_time": submission_time, "title": title, "message": message, "image": image})
+                    INSERT INTO question ("submission_time", "vote_number", "view_number", "title", "message", "image", "user_id")
+                    VALUES (%(submission_time)s, 0, 0, %(title)s, %(message)s, %(image)s, %(user_id)s); """,
+                   {"submission_time": submission_time, "title": title, "message": message, "image": image, "user_id": user_id})
 
 
 @connection.connection_handler
-def complement_new_answer_data(cursor, message, image, question_id):
+def complement_new_answer_data(cursor, message, image, question_id, user_id):
     submission_time = get_submission_time()
     cursor.execute("""
-                    INSERT INTO answer ("submission_time", "vote_number", "question_id", "message", "image")
-                    VALUES  (%(submission_time)s, 0, %(question_id)s, %(message)s, %(image)s); """,
-                   {"submission_time": submission_time, "question_id": question_id, "message": message, "image": image})
+                    INSERT INTO answer ("submission_time", "vote_number", "question_id", "message", "image","user_id")
+                    VALUES  (%(submission_time)s, 0, %(question_id)s, %(message)s, %(image)s, %(user_id)s); """,
+                   {"submission_time": submission_time, "question_id": question_id, "message": message, "image": image, "user_id":user_id})
 
 
 @connection.connection_handler
@@ -162,28 +162,28 @@ def raise_view_number(cursor, question_id):
 
 
 @connection.connection_handler
-def complement_new_comment_of_question(cursor, message, question_id):
+def complement_new_comment_of_question(cursor, message, question_id, user_id):
     submission_time = get_submission_time()
     cursor.execute("""
-                    INSERT INTO comment ("question_id", "answer_id" , "message" ,"submission_time", "edited_count")
-                    VALUES (%(question_id)s, %(none)s, %(message)s, %(submission_time)s, %(none)s); """,
-                   {"question_id": question_id,  "submission_time": submission_time, "message": message, "none": None })
+                    INSERT INTO comment ("question_id", "answer_id" , "message" ,"submission_time", "edited_count", "user_id")
+                    VALUES (%(question_id)s, %(none)s, %(message)s, %(submission_time)s, %(none)s, %(user_id)s); """,
+                   {"question_id": question_id,  "submission_time": submission_time, "message": message, "none": None, "user_id": user_id })
 
 
 @connection.connection_handler
-def complement_new_comment_of_answer(cursor, message, answer_id):
+def complement_new_comment_of_answer(cursor, message, answer_id, user_id):
     submission_time = get_submission_time()
     cursor.execute("""
-                    INSERT INTO comment ("question_id", "answer_id" , "message" ,"submission_time", "edited_count")
-                    VALUES (%(none)s,%(answer_id)s, %(message)s, %(submission_time)s, %(none)s); """,
-                   {"answer_id": answer_id, "submission_time": submission_time, "message": message, "none": None})
+                    INSERT INTO comment ("question_id", "answer_id" , "message" ,"submission_time", "edited_count", "user_id")
+                    VALUES (%(none)s,%(answer_id)s, %(message)s, %(submission_time)s, %(none)s, %(user_id)s); """,
+                   {"answer_id": answer_id, "submission_time": submission_time, "message": message, "none": None, "user_id":user_id })
 
 
 @connection.connection_handler
 def get_comment_data(cursor, question_id):
     cursor.execute("""
                     SELECT comment.id, comment.question_id, comment.answer_id, comment.message, comment.submission_time,
-                    comment.edited_count FROM comment
+                    comment.edited_count, comment.user_id FROM comment
                     FULL JOIN answer
                     ON comment.answer_id = answer.id
                     WHERE comment.question_id = %(question_id)s OR answer.question_id = %(question_id)s; """,
