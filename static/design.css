@@ -1,3 +1,7 @@
+:root {
+  --mainColor: black;
+}
+
 body {
     font-family: arial, helvetica, sans-serif;
     font-size: 14px;
@@ -89,6 +93,11 @@ a {
 	text-decoration: None;
     font-size: 30px;
     color:#1a0901;
+}
+
+#question:hover{
+		color: black;
+  -webkit-text-stroke: 2px var(--mainColor);
 }
 
 li {
