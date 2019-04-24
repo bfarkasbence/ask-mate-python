@@ -43,13 +43,21 @@
         <tr>
             <td>{{ item.submission_time }}</td>
             <td> {{ item.message }}</td>
-            <td><a href="/comment/{{ item.question_id }}/{{ item.id }}/delete"><button class="button">Delete comment!</button></a> </td>
+            <td><a href="/comment/{{ item.question_id }}/{{ item.id }}/edit"><button class="button">Edit comment!</button></a></td>
+            <td><a href="/comment/{{ question_id }}/{{ item.id }}/delete"><button class="button">Delete comment!</button></a> </td>
         </tr>
         {% endif %}
     {% endfor %}
     {% endif %}
 </table>
 <h2>Answers:</h2>
+{% if answers_data|length == 0 %}
+<table>
+    <tr>
+        <td>There is no answer yet.</td>
+    </tr>
+</table>
+{% else %}
 <table>
     <th>
         <th>ID</th>
@@ -89,13 +97,16 @@
         <tr>
             <td>{{ comments.submission_time }}</td>
             <td>{{ comments.message }}</td>
-            <td><a href="/comment/{{ comments.answer_id }}/{{ comments.id }}/delete"><button class="button">Delete comment!</button></a></td>
+            <td><a href="/comment/{{ question_id }}/{{ comments.id }}/edit"><button class="button">Edit comment!</button></a></td>
+
+            <td><a href="/comment/{{ question_id }}/{{ comments.id }}/delete"><button class="button">Delete comment!</button></a></td>
         </tr>
 
         {% endif %}
     {% endfor %}
     {% endfor %}
 </table>
+{% endif %}
 <div class="align-center">
 <a href="/questions/{{ question_id }}/new-answer">
     <button type="button" class="button">Add answer!</button>
@@ -104,7 +115,7 @@
     <button type="button" class="button">Back to questions.</button>
 </a>
 <a href="/questions/{{ question_id }}/delete">
-    <button type="button" class="button">Delete questions.</button>
+    <button type="button" class="button">Delete question.</button>
 </a>
 </div>
 </body>

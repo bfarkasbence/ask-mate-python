@@ -156,7 +156,7 @@ def delete_comment_by_id(comment_id, question_id):
 
 
 @app.route("/comment/<question_id>/<comment_id>/edit", methods=['GET'])
-def editing_comments(comment_id, question_id):
+def editing_comments(question_id, comment_id):
     comment = data_manager.get_comment_message_and_question_id(comment_id)
     return render_template("edit-comment.html", comment=comment, comment_id=comment_id, question_id=question_id)
 
@@ -188,6 +188,12 @@ def register():
 
 def check_username_or_mail_in_db(username, password):
     return len(data_manager.check_username_or_email(username, password)) == 0
+
+
+@app.route("/user-list")
+def route_users_list():
+    users = data_manager.get_users()
+    return render_template("users-list.html", users=users)
 
 
 if __name__ == "__main__":

@@ -2,20 +2,37 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Register</title>
+    <title>Registration</title>
+    <link rel="stylesheet" type="text/css" href="/static/design.css"/>
+    <link rel="shortcut icon" href="/static/logo.ico" />
 </head>
 <body>
 
 {% if get_flashed_messages() %}
     <label><h2 class="error-message">{{ get_flashed_messages()[0] }}</h2></label>
 {% endif %}
+<h1>Registration</h1>
+<br><br>
+<table>
 <form method="POST" action="/registration">
-    <input name="username" type="text" placeholder="User name" required ><br>
-    <input name="password" type="password" required minlength="8"><br>
-    <input name="email" type="email" placeholder="email" required><br>
-    <button type="submit">Submit</button>
-
+    <tr>
+        <td> Username:</td>
+        <td><input name="username" type="text" placeholder="User name" required></td>
+    </tr>
+    <tr>
+        <td> Password:</td>
+        <td><input name="password" type="password" required minlength="8"></td>
+    </tr>
+    <tr>
+        <td> Email:</td>
+        <td><input name="email" type="email" placeholder="Email" required></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td><button type="submit" class="button">Register</button></td>
+    </tr>
 </form>
+</table>
 
 </body>
 </html>
