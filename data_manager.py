@@ -267,3 +267,13 @@ def check_username_or_email(cursor,username,email):
                     WHERE username = %(username)s OR email = %(email)s
                     """,{'username':username, 'email':email})
     return cursor.fetchall()
+
+
+@connection.connection_handler
+def user_login(cursor, username):
+    cursor.execute("""SELECT password FROM users
+                     WHERE username LIKE %(username)s;""",
+                   {'username': username})
+    return cursor.fetchone()
+
+
