@@ -155,7 +155,7 @@ def delete_comment_by_id(comment_id, question_id):
 
 
 @app.route("/comment/<question_id>/<comment_id>/edit", methods=['GET'])
-def editing_comments(comment_id, question_id):
+def editing_comments(question_id, comment_id):
     comment = data_manager.get_comment_message_and_question_id(comment_id)
     return render_template("edit-comment.html", comment=comment, comment_id=comment_id, question_id=question_id)
 

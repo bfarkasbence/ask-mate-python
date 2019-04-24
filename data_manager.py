@@ -39,12 +39,12 @@ def get_answer_message_and_question_id(cursor,answer_id):
 
 
 @connection.connection_handler
-def get_question_data_by_id(cursor, id):
+def get_question_data_by_id(cursor, question_id):
     cursor.execute("""
                     SELECT * FROM question
                     WHERE id = %(id)s;
                    """,
-                   {'id': id})
+                   {'id': question_id})
     question = cursor.fetchall()
     return question
 
