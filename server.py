@@ -36,7 +36,7 @@ def route_add_question_form():
 
 @app.route("/add-question", methods=['POST'])
 def route_add_question():
-    data_manager.complement_new_question_data(request.form['title'], request.form['message'], request.form['image'])
+    data_manager.complement_new_question_data(request.form['title'], request.form['message'], request.form['image'], session.get('user_id'))
     return redirect('/list')
 
 
@@ -47,7 +47,7 @@ def route_add_answer_form(question_id):
 
 @app.route("/questions/<question_id>/new-answer", methods=['POST'])
 def route_add_answer(question_id):
-    data_manager.complement_new_answer_data(request.form['message'], request.form['image'], question_id)
+    data_manager.complement_new_answer_data(request.form['message'], request.form['image'], question_id, session.get('user_id'))
     return redirect(url_for("route_question", question_id=question_id))
 
 
@@ -131,7 +131,7 @@ def new_questions_comment(question_id):
 
 @app.route("/question/<question_id>/new-comment", methods=['POST'])
 def questions_comment(question_id):
-    data_manager.complement_new_comment_of_question(request.form['message'], question_id)
+    data_manager.complement_new_comment_of_question(request.form['message'], question_id, session.get('user_id'))
     return redirect(url_for("route_question", question_id=question_id))
 
 
@@ -142,7 +142,7 @@ def new_answers_comment(question_id, answer_id):
 
 @app.route("/answer/<question_id>/<answer_id>/new-comment", methods=['POST'])
 def answers_comment(question_id, answer_id):
-    data_manager.complement_new_comment_of_answer(request.form['message'], answer_id)
+    data_manager.complement_new_comment_of_answer(request.form['message'], answer_id, session.get('user_id'))
     return redirect(url_for("route_question", question_id=question_id))
 
 
