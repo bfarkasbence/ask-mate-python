@@ -271,7 +271,7 @@ def check_username_or_email(cursor,username,email):
 
 @connection.connection_handler
 def user_login(cursor, username):
-    cursor.execute("""SELECT password FROM users
+    cursor.execute("""SELECT password, id FROM users
                      WHERE username LIKE %(username)s;""",
                    {'username': username})
     return cursor.fetchone()

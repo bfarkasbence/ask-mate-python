@@ -7,7 +7,23 @@
     <link rel="shortcut icon" href="/static/logo.ico" />
 </head>
 <body>
-<h1>Add answer:</h1>
+<h1><table><tr><td width=20% ><div align="center">
+    <form action="/search" method="get" >
+    <input type="text" name="search_box" placeholder="What are you looking for?"><br>
+    <button type="submit" class="button">Search</button></a>
+    </form>
+</div></td>
+<td width=60% style="font-size: 35px">Add answer:</td>
+<td width=20% style="font-size: 13px">{% if session.username %}
+ You are logged in as <i>{{ session.username }}</i>
+<a href="/logout">
+    <button type="button" class="button">Log out.</button></a>
+{% else %}
+<a href="/login">
+    <button type="button" class="button">Log in.</button>
+</a>
+{% endif %}</td></tr></div>
+</table></h1>
     <table id="input">
     <form action="" method="post">
     <tr id="input">

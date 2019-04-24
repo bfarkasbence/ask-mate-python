@@ -61,13 +61,11 @@ tr#margin{
 h1 {
     color: #fafafa;
     background-color: #1a0901	;
-    font-size: 2em;
     margin: 0;
     margin-bottom: 20px;
     padding: 20px;
     font-style: normal;
     text-align: center;
-    letter-spacing: 0.5em;
     border-bottom-style: solid;
     border-bottom-width: 12px;
     border-bottom-color: #802d05;

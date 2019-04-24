@@ -13,8 +13,16 @@
     <button type="submit" class="button">Search</button></a>
     </form>
 </div></td>
-<td width=60%>Question:</td>
-    <td width=20%><div><a href="login.html"><button class="button">Log in!</button></a></td></tr></div>
+<td width=60% style="font-size: 35px">Question:</td>
+<td width=20% style="font-size: 13px">{% if session.username %}
+ You are logged in as <i>{{ session.username }}</i>
+<a href="/logout">
+    <button type="button" class="button">Log out.</button></a>
+{% else %}
+<a href="/login">
+    <button type="button" class="button">Log in.</button>
+</a>
+{% endif %}</td></tr></div>
 </table>
 </h1>
 <table>

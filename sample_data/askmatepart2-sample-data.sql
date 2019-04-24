@@ -154,3 +154,5 @@ SELECT pg_catalog.setval('tag_id_seq', 3, true);
 INSERT INTO question_tag VALUES (0, 1);
 INSERT INTO question_tag VALUES (1, 3);
 INSERT INTO question_tag VALUES (2, 3);
+
+INSERT INTO users VALUES (0, 'admin', '$2b$12$WK2vtt1s9EMXTP7YZFgtJe0kZBcYhc2weoiB8cBjbS9uCIzafDJPC', 'admin@ask-mate.code.cool', '2019-04-23 14:20:58')
