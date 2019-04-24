@@ -183,7 +183,7 @@ def complement_new_comment_of_answer(cursor, message, answer_id, user_id):
 def get_comment_data(cursor, question_id):
     cursor.execute("""
                     SELECT comment.id, comment.question_id, comment.answer_id, comment.message, comment.submission_time,
-                    comment.edited_count FROM comment
+                    comment.edited_count, comment.user_id FROM comment
                     FULL JOIN answer
                     ON comment.answer_id = answer.id
                     WHERE comment.question_id = %(question_id)s OR answer.question_id = %(question_id)s; """,

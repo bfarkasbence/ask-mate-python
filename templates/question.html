@@ -26,14 +26,18 @@
             </td>
             {% endfor %}
         <td>
+        {% if session.user_id is defined %}
         <a href="/question/{{ item.id }}/new-comment"><button type="button" class="button"> Add new comment!</button></a>
+        {% endif %}
         </td>
+        {% if session.user_id is defined %}
         <td>
             <a href="/questions/{{ item.id }}/like"><button type="button" class="button">👍</button></a>
         </td>
         <td>
             <a href="/questions/{{ item.id }}/dislike"><button type="button" class="button">👎</button></a>
         </td>
+            {% endif %}
         {% endfor %}
     </tr>
     {% if comment_data != None %}
@@ -43,8 +47,10 @@
         <tr>
             <td>{{ item.submission_time }}</td>
             <td> {{ item.message }}</td>
+            {% if session.user_id == item.user_id or session.user_id == 0%}
             <td><a href="/comment/{{ item.question_id }}/{{ item.id }}/edit"><button class="button">Edit comment!</button></a></td>
             <td><a href="/comment/{{ question_id }}/{{ item.id }}/delete"><button class="button">Delete comment!</button></a> </td>
+            {% endif %}
         </tr>
         {% endif %}
     {% endfor %}
@@ -68,38 +74,45 @@
         <th>Image</th>
     </th>
     {% for item in answers_data %}
-    <tr>
+        <tr>
+
         {% for data in item.values() %}
-        <td class="topborder" >
-            {{ data }}
-        </td>
+            <td class="topborder" >
+                {{ data }}
+            </td>
         {% endfor %}
         <td class="topborder">
         </td>
-        <td class="topborder">
-            <a href="/answer/{{ item.id }}/edit"><button type="button" class="button">Edit answer!</button></a>
-        </td>
-        <td class="topborder">
-            <a href="/answer/{{ item.question_id }}/{{ item.id }}/delete"><button type="button" class="button">Delete answer!</button></a>
-        </td>
-        <td class="topborder">
-            <a href="/answer/{{item.question_id }}/{{ item.id }}/new-comment"><button type="button" class="button"> Add new comment!</button></a>
-        </td>
-        <td class= "topborder">
-            <a href="/answer/{{ item.question_id }}/{{ item.id }}/like"><button type="button" class="button">👍</button></a>
-        </td>
-        <td class="topborder">
-            <a href="/answer/{{ item.question_id }}/{{ item.id }}/dislike"><button type="button" class="button">👎</button></a>
-        </td>
+        {% if session.user_id == item.user_id or session.user_id == 0 %}
+            <td class="topborder">
+                <a href="/answer/{{ item.id }}/edit"><button type="button" class="button">Edit answer!</button></a>
+            </td>
+            <td class="topborder">
+                <a href="/answer/{{ item.question_id }}/{{ item.id }}/delete"><button type="button" class="button">Delete answer!</button></a>
+            </td>
+            {% endif %}
+            {% if session.user_id is defined %}
+            <td class="topborder">
+                <a href="/answer/{{item.question_id }}/{{ item.id }}/new-comment"><button type="button" class="button"> Add new comment!</button></a>
+            </td>
+            <td class= "topborder">
+                <a href="/answer/{{ item.question_id }}/{{ item.id }}/like"><button type="button" class="button">👍</button></a>
+            </td>
+            <td class="topborder">
+                <a href="/answer/{{ item.question_id }}/{{ item.id }}/dislike"><button type="button" class="button">👎</button></a>
+            </td>
+        {% endif %}
     </tr>
     {% for comments in comment_data %}
         {% if item.id == comments.answer_id %}
         <tr>
             <td>{{ comments.submission_time }}</td>
             <td>{{ comments.message }}</td>
+            {% if session.user_id == comments.user_id or session.user_id == 0 %}
             <td><a href="/comment/{{ question_id }}/{{ comments.id }}/edit"><button class="button">Edit comment!</button></a></td>
 
             <td><a href="/comment/{{ question_id }}/{{ comments.id }}/delete"><button class="button">Delete comment!</button></a></td>
+            {% endif %}
         </tr>
 
         {% endif %}
@@ -108,15 +121,19 @@
 </table>
 {% endif %}
 <div class="align-center">
+    {% if session.user_id is defined %}
 <a href="/questions/{{ question_id }}/new-answer">
     <button type="button" class="button">Add answer!</button>
 </a>
+    {% endif %}
 <a href="/list">
     <button type="button" class="button">Back to questions.</button>
 </a>
+{% if session.user_id == question_data[0].user_id or session.user_id == 0 %}
 <a href="/questions/{{ question_id }}/delete">
     <button type="button" class="button">Delete question.</button>
 </a>
+{% endif %}
 </div>
 </body>
 </html>
