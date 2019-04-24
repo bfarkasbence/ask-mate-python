@@ -179,7 +179,6 @@ def verify_password(plain_text_password, hashed_password):
     return bcrypt.checkpw(plain_text_password.encode('utf-8'), hashed_bytes_password)
 
 
-
 @app.route("/registration", methods=['POST', 'GET'])
 def register():
     if request.method == 'GET':
@@ -211,19 +210,27 @@ def login():
 
 @app.route('/login', methods=["POST"])
 def get_login():
-    if verify_password(request.form["password"], data_manager.user_login(request.form["username"]).get('password')):
-        session["username"] = request.form["username"]
-        session['logged_in'] = True
-        return redirect('/list')
-    else:
-        flash("Wrong username or password!")
+    try:
+        user_data = data_manager.user_login(request.form["username"])
+        if verify_password(request.form["password"], user_data.get('password')):
+            session["username"] = request.form["username"]
+            session['logged_in'] = True
+            session['user_id'] = user_data.get('id')
+            return redirect('/list')
+        else:
+            flash("Wrong password!")
+            return redirect('/login')
+    except AttributeError:
+        flash("Wrong username")
         return redirect('/login')
 
 
 @app.route('/logout', methods=["GET"])
 def logout():
     session.pop('username', None)
-    return redirect(url_for('login'))
+    session.pop('logged_in', None)
+    session.pop('user_id', None)
+    return redirect("http://codecool.com")
 
 
 if __name__ == "__main__":
