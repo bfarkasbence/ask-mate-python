@@ -17,8 +17,6 @@ def route_sorted_list_of_questions():
 @app.route('/')
 def route_list_of_latest_questions():
     questions = data_manager.get_questions('submission_time', 'DESC', 5)
-    if not session.get('logged_in'):
-        return render_template('login.html')
     return render_template("home.html", list_of_questions=questions)
 
 
