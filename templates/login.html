@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="/static/design.css">
+    <link rel="shortcut icon" href="/static/logo.ico" />
 </head>
 <body>
 {% block body %}
@@ -19,17 +21,54 @@
     <div class="align-center">
 
 
-</div>>
-        <h1>Login</h1
-<div class="login-form">
-<div class="control-group">
-				<input type="text" class="login-field" value="" placeholder="username" name="username">
-<label class="login-field-icon fui-user" for="login-name"></label></div>
-<div class="control-group">
-				<input type="password" class="login-field" value="" placeholder="password" name="password">
-<label class="login-field-icon fui-lock" for="login-pass"></label></div>
-<input type="submit" value="Log in" class="btn btn-primary btn-large btn-block">
+</div>
+        <h1>Log in</h1>
+<br>
+{% if get_flashed_messages() %}
+    <label><h2 class="error-message">{{ get_flashed_messages()[0] }}</h2></label>
+{% endif %}
+<br>
 
+
+<div class="login-form">
+
+    <table>
+        <tr>
+            <td>Username:</td>
+            <td>
+                <div class="control-group">
+                    <input type="text" class="login-field" value="" placeholder="Username" name="username">
+                    <label class="login-field-icon fui-user" for="login-name"></label>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Password:</td>
+            <td>
+                <div class="control-group">
+                    <input type="password" class="login-field" value="" placeholder="Password" name="password">
+                    <label class="login-field-icon fui-lock" for="login-pass"></label>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+            </td>
+            <td>
+                <input type="submit" value="Log in!" class="button">
+            </td>
+        </tr>
+        <tr>
+            <td>
+            </td>
+            <td>
+                <a href="/registration">
+                    <button type="button" class="button">Registration!</button>
+                </a>
+            </td>
+        </tr>
+</table>
+</div>
 </div>
 </div>
 </div>

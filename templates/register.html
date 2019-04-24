@@ -8,11 +8,12 @@
 </head>
 <body>
 
+<h1>Registration</h1>
+<br>
 {% if get_flashed_messages() %}
     <label><h2 class="error-message">{{ get_flashed_messages()[0] }}</h2></label>
 {% endif %}
-<h1>Registration</h1>
-<br><br>
+<br>
 <table>
 <form method="POST" action="/registration">
     <tr>
