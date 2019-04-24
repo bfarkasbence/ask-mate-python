@@ -7,7 +7,7 @@
 <body>
 
 {% if get_flashed_messages() %}
-    <h2 class="error-message">{{ get_flashed_messages()[0] }}</h2>
+    <label><h2 class="error-message">{{ get_flashed_messages()[0] }}</h2></label>
 {% endif %}
 <form method="POST" action="/registration">
     <input name="username" type="text" placeholder="User name" required ><br>
