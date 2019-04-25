@@ -68,25 +68,37 @@
     </tr>
 
 </table>
-<table>
+{% if comment_data != None %}
+{% for item in comment_data %}
+{% if item.question_id != None %}
+    <table id="comment_table">
+            <tr>
+                <td width="90%">{{ item.submission_time }}</td>
+                <td>
+                    {% if session.user_id == item.user_id or session.user_id == 0%}
+                    <a href="/comment/{{ item.question_id }}/{{ item.id }}/edit"><button class="button">✍️</button></a>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if session.user_id == item.user_id or session.user_id == 0%}
+                    <a href="/comment/{{ question_id }}/{{ item.id }}/delete"><button class="button">🗑️</button></a>
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">{{ item.message }}</td>
+            </tr>
+            <tr>
+                <td colspan="3" align="left">{{ item.user_id }}</td>
+            </tr>
+    </table>
+{% endif %}
+{% endfor %}
+{% endif %}
 
 
-    {% if comment_data != None %}
-    {% for item in comment_data %}
-        {% if item.question_id != None %}
 
-        <tr>
-            <td>{{ item.submission_time }}</td>
-            <td> {{ item.message }}</td>
-            {% if session.user_id == item.user_id or session.user_id == 0%}
-            <td><a href="/comment/{{ item.question_id }}/{{ item.id }}/edit"><button class="button">✍️</button></a></td>
-            <td><a href="/comment/{{ question_id }}/{{ item.id }}/delete"><button class="button">🗑️</button></a> </td>
-            {% endif %}
-        </tr>
-        {% endif %}
-    {% endfor %}
-    {% endif %}
-</table>
+
 <h2>Answers:</h2>
 <div class="align-center">
     {% if session.user_id is defined %}
