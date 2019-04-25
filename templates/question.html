@@ -25,38 +25,52 @@
 {% endif %}</td></tr></div>
 </table>
 </h1>
-<table>
-    <tr align="center">
-        <th>ID</th>
-        <th>Submission time</th>
-        <th>View number</th>
-        <th>Vote number</th>
-        <th>Title</th>
-        <th>Message</th>
-        <th>Image</th>
+
+
+<table id="question_table">
+    <tr>
+        <td align="left" width="80%">{{ question_data[0].submission_time }}</td>
+        <td align="right">👁️</td>
+        <td align="left">{{ question_data[0].view_number }}</td>
+        <td align="right">👍</td>
+        <td align="left">{{ question_data[0].vote_number }}</td>
     </tr>
     <tr>
-        {% for item in question_data %}
-            {% for data in item.values() %}
-            <td align="center">
-                {{ data }}
-            </td>
-            {% endfor %}
-        <td>
-        {% if session.user_id is defined %}
-        <a href="/question/{{ item.id }}/new-comment"><button type="button" class="button">💬</button></a>
-        {% endif %}
-        </td>
-        {% if session.user_id is defined %}
-        <td>
-            <a href="/questions/{{ item.id }}/like"><button type="button" class="button">👍</button></a>
-        </td>
-        <td>
-            <a href="/questions/{{ item.id }}/dislike"><button type="button" class="button">👎</button></a>
-        </td>
-            {% endif %}
-        {% endfor %}
+        <td colspan="5"><b>{{ question_data[0].title }}</b></td>
     </tr>
+     <tr>
+        <td colspan="5">{{ question_data[0].message }}</td>
+    </tr>
+    <tr>
+        <td align="left">{{ question_data[0].user_id }}</td>
+        <td align="center">
+            {% if session.user_id is defined %}
+            <a href="/question/{{ question_data[0].id }}/new-comment"><button type="button" class="button">💬</button></a>
+            {% endif %}
+        </td>
+        <td align="center">
+            {% if session.user_id is defined %}
+            <a href="/questions/{{ question_data[0].id }}/like"><button type="button" class="button">👍</button></a>
+            {% endif %}
+        </td>
+        <td align="center">
+             {% if session.user_id is defined %}
+            <a href="/questions/{{ question_data[0].id }}/dislike"><button type="button" class="button">👎</button></a>
+            {% endif %}
+        </td>
+        <td align="center">
+            {% if session.user_id == question_data[0].user_id or session.user_id == 0 %}
+            <a href="/questions/{{ question_id }}/delete">
+                <button type="button" class="button">🗑️</button>
+            </a>
+            {% endif %}
+        </td>
+    </tr>
+
+</table>
+<table>
+
+
     {% if comment_data != None %}
     {% for item in comment_data %}
         {% if item.question_id != None %}
@@ -82,13 +96,13 @@
     {% endif %}
 </div>
 {% if answers_data|length == 0 %}
-<table>
+<table id="question_table">
     <tr>
         <td>There is no answer yet.</td>
     </tr>
 </table>
 {% else %}
-<table>
+<table id="question_table">
     <tr>
         <th>ID</th>
         <th>Submission time</th>
@@ -144,15 +158,12 @@
     {% endfor %}
 </table>
 {% endif %}
+<br><br>
 <div class="align-center">
 <a href="/list">
     <button type="button" class="button" style="width: 160px">Back to questions.</button>
 </a>
-{% if session.user_id == question_data[0].user_id or session.user_id == 0 %}
-<a href="/questions/{{ question_id }}/delete">
-    <button type="button" class="button" style="width: 160px">Delete question.</button>
-</a>
-{% endif %}
+
 </div>
 </body>
 </html>
