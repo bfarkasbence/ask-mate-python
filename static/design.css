@@ -59,6 +59,12 @@ td{
 	padding: 10px;
 }
 
+.grey-text{
+	font-size: 8px;
+	color: darkgray;
+}
+
+
 .align-center{
 	text-align: center;
 }

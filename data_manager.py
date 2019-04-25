@@ -41,8 +41,8 @@ def get_answer_message_and_question_id(cursor,answer_id):
 @connection.connection_handler
 def get_question_data_by_id(cursor, question_id):
     cursor.execute("""
-                    SELECT * FROM question
-                    WHERE id = %(id)s;
+                    SELECT question.*, users.username FROM question LEFT JOIN users ON question.user_id = users.id
+                    WHERE question.id = %(id)s;
                    """,
                    {'id': question_id})
     question = cursor.fetchall()
@@ -52,8 +52,8 @@ def get_question_data_by_id(cursor, question_id):
 @connection.connection_handler
 def get_list_of_answers(cursor, question_id):
     cursor.execute("""
-                    SELECT * FROM answer
-                    WHERE question_id = %(question_id)s
+                    SELECT answer.*, users.username FROM answer LEFT JOIN users ON answer.user_id = users.id
+                    WHERE answer.question_id = %(question_id)s
                     ORDER BY vote_number DESC;
                    """,
                    {'question_id': question_id})
@@ -183,9 +183,9 @@ def complement_new_comment_of_answer(cursor, message, answer_id, user_id):
 def get_comment_data(cursor, question_id):
     cursor.execute("""
                     SELECT comment.id, comment.question_id, comment.answer_id, comment.message, comment.submission_time,
-                    comment.edited_count, comment.user_id FROM comment
-                    FULL JOIN answer
-                    ON comment.answer_id = answer.id
+                    comment.edited_count, comment.user_id, users.username FROM comment
+                    LEFT JOIN users ON comment.user_id = users.id
+                    FULL JOIN answer ON comment.answer_id = answer.id
                     WHERE comment.question_id = %(question_id)s OR answer.question_id = %(question_id)s; """,
                    {"question_id": question_id})
     comments = cursor.fetchall()
